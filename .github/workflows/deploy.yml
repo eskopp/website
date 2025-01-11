@@ -16,11 +16,11 @@ jobs:
 
       - name: Checkout repository
         uses: actions/checkout@v4
-    
+
       - uses: actions/setup-node@v4
         with:
           node-version: "latest"
-      
+
       - name: Set up Python 3
         uses: actions/setup-python@v5
         with:
@@ -39,7 +39,7 @@ jobs:
 
       - name: Build Hugo site
         run: |
-          
+
           npm update
           hugo mod npm pack
           npm install
