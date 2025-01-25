@@ -44,7 +44,9 @@ jobs:
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
-          git add *
-          git add .*
+          git add go.mod
+          git add go.sum
+          git add package-lock.json
+          git add package.json
           git commit -m "Update Hugo modules and Go version [skip ci]" || echo "No changes to commit"
-          git push -f
+          git push 
