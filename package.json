@@ -63,6 +63,6 @@
     "workbox-strategies": "^7.3.0"
   },
   "devDependencies": {},
-  "name": "hugo-theme-bootstrap-skeleton",
+  "name": "erik-skopp.de",
   "version": "0.1.0"
 }
