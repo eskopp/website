@@ -171,11 +171,11 @@ creativeCommons:
   #moderation: false # Same as Staticman's moderation.
 
 # See https://giscus.app
-giscus:
-  repo: "razonyang/hugo-theme-bootstrap-skeleton" # required.
-  repoId: "R_kgDOHJi95g" # required.
-  category: "General" # required.
-  categoryId: "DIC_kwDOHJi95s4CTy6q" # required.
+#giscus:
+  #repo: "razonyang/hugo-theme-bootstrap-skeleton" # required.
+  #repoId: "R_kgDOHJi95g" # required.
+  #category: "General" # required.
+  #categoryId: "DIC_kwDOHJi95s4CTy6q" # required.
   # theme: "dark" # Default to auto.
   # mapping: "title" # Default to pathname.
   # inputPosition: "bottom" # Default to top.
@@ -206,8 +206,8 @@ search:
   # debug: true
 
 reward:
-  alipay: images/reward/alipay.png
-  wechat: images/reward/wechat.png
+  #alipay: images/reward/alipay.png
+  #wechat: images/reward/wechat.png
   #paypal: images/reward/paypal.png
   #patreon: images/reward/patreon.png
   #liberapay: images/reward/liberapay.png
@@ -243,7 +243,7 @@ pwa:
     #   src: /images/icons/icon-144x144.png
 
 contact:
-  endpoint: https://getform.io/f/56041c81-9e03-4c24-b9c5-61238854d4cd # Backend endpoint, remove this line if you're using Netlify.
+  # endpoint: https://getform.io/f/56041c81-9e03-4c24-b9c5-61238854d4cd # Backend endpoint, remove this line if you're using Netlify.
   # file: true # Enable file upload
   # fileField: image # The name of file field.
   # reCaptcha:
@@ -272,44 +272,44 @@ docs:
 
 social:
   # See https://hbs.razonyang.com/v1/en/docs/widgets/social-links/.
-  email: user@domain.tld
-  facebook: yourfacebookusername
-  github: razonyang/hugo-theme-bootstrap
-  gitlab: yourgitlabusername
-  linkedin: yourlinkedinusername
-  xing: yourxingusername
-  stackoverflow: yourstackoverflowuserid
-  twitter: yourtwitterusername
-  weibo: yourweibousername
-  zhihu: yourzhihuusername
-  instagram: yourinstagramusername
-  quora: yourquorausername
-  tumblr: yourtumblrusername
-  reddit: yourredditusername
-  telegram: yourtelegramusername
-  qq: yourqqnumber
-  dockerhub: yourdockerhubusername
-  bitbucket: yourbitbucketworkspaceid
-  kaggle: yourkaggleusername
-  medium: yourmediumusername # Medium username or custom domain(e.g. https://custom.domain.tld).
-  lastfm: yourlastfmusername
-  bilibili: yourbilibiliuserid
-  youtube: youryoutubechannelid
-  discord: yourdiscordinvitecode
-  discourse: https://yourforum.tld
-  facebookgroup: yourfacebookgroupname
-  tiktok: yourtiktokusername
-  pinterest: yourpinterestusername
-  mastodon: yourmastodonusername
-  liberapay: yourliberapayaccount
-  paypal: razonyang
-  patreon: razonyang
-  tipeee: yourtipeeeaccount-fr
+  #email: user@domain.tld
+  #facebook: yourfacebookusername
+  github: eskopp/website
+  #gitlab: yourgitlabusername
+  #linkedin: yourlinkedinusername
+  #xing: yourxingusername
+  #stackoverflow: yourstackoverflowuserid
+  #twitter: yourtwitterusername
+  #weibo: yourweibousername
+  #zhihu: yourzhihuusername
+  #instagram: yourinstagramusername
+  #quora: yourquorausername
+  #tumblr: yourtumblrusername
+  #reddit: yourredditusername
+  #telegram: yourtelegramusername
+  #qq: yourqqnumber
+  #dockerhub: yourdockerhubusername
+  #bitbucket: yourbitbucketworkspaceid
+  #kaggle: yourkaggleusername
+  #medium: yourmediumusername # Medium username or custom domain(e.g. https://custom.domain.tld).
+  #lastfm: yourlastfmusername
+  #bilibili: yourbilibiliuserid
+  #youtube: youryoutubechannelid
+  #discord: yourdiscordinvitecode
+  #discourse: https://yourforum.tld
+  #facebookgroup: yourfacebookgroupname
+  #tiktok: yourtiktokusername
+  #pinterest: yourpinterestusername
+  #mastodon: yourmastodonusername
+  #liberapay: yourliberapayaccount
+  #paypal: razonyang
+  #patreon: razonyang
+  #tipeee: yourtipeeeaccount-fr
 
 author:
-  name: Razon Yang
+  name: Erik Skopp
   # avatar: images/profile.png # Avatar image. Default to "images/profile.webp".
-  bio: 'Gopher, PHPer, Full Stack Engineer.'
+  bio: 'Physics student'
   company: Company # HTML markup are supported, such as: <a href="https://example.com" target="_blank" rel="noopener noreferrer">Company</a>.
   location: Earth # HTML markup are supported, such as: <a href='https://www.openstreetmap.org/search?query=Earth'>Earth</a>.
   # about: https://razonyang.com # The external about page. The internal about page will be used if not set.
@@ -317,10 +317,10 @@ author:
     # layout: compact
   }
   # See https://hbs.razonyang.com/v1/en/docs/widgets/social-links/.
-  social:
-    email: razonyang@gmail.com
-    github: razonyang/hugo-theme-bootstrap
-    twitter: razonyang
-    patreon: razonyang
-    paypal: razonyang
-    rss: "" # Remove RSS
+  #social:
+  #  email: razonyang@gmail.com
+  #  github: razonyang/hugo-theme-bootstrap
+  #  twitter: razonyang
+  #  patreon: razonyang
+  #  paypal: razonyang
+  #  rss: "" # Remove RSS
