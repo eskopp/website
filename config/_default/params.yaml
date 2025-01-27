@@ -45,7 +45,7 @@ dateFormat: ":date_long"
 # Google Adsense
 googleAdsense: 
 
-# math: true # Enable math globally.
+math: true # Enable math globally.
 # toc: false # Disable TOC globally.
 # tocPosition: content
 # breadcrumb: false # Disable breadcrumb
@@ -140,10 +140,10 @@ siteVerification:
   shenma: 
 
 creativeCommons:
-  # by: true # Credit must be given to you, the creator.
-  # nc: true # Only noncommercial use of your work is permitted.
-  # nd: true # No derivatives or adaptations of your work are permitted.
-  # sa: true # Adaptations must be shared under the same terms.
+   by: true # Credit must be given to you, the creator.
+   nc: true # Only noncommercial use of your work is permitted.
+   nd: true # No derivatives or adaptations of your work are permitted.
+   sa: true # Adaptations must be shared under the same terms.
 
 # utterances:
   # repo: razonyang/hugo-theme-bootstrap-skeleton # Replace with your repository.
@@ -228,8 +228,8 @@ fontSize:
 pwa:
   manifest:
     # name:  # Default to site title.
-    short_name: HBS
-    # display: fullscreen # Default to standalone.
+    short_name: Erik Skopp
+    display: fullscreen # Default to standalone.
     # description:  # Default to site description.
     # theme_color: 
     # background_color: 
@@ -258,9 +258,9 @@ repo:
 topAppBar:
   # See https://hbs.razonyang.com/v1/en/docs/widgets/social-links/.
   social:
-    github: razonyang/hugo-theme-bootstrap
-    patreon: razonyang
-    paypal: razonyang
+    github: eskopp/website
+    #patreon: razonyang
+    #paypal: razonyang
 
 docs:
   nav:
