@@ -3,4 +3,4 @@ main:
     identifier: Gitlab
     url: https://gitlab.erik-skopp.de/explore
     params:
-      icon: '<i class="fas fa-fw fa-book"></i>'
+      icon: '<i class="fa-brands fa-gitlab"></i>'
