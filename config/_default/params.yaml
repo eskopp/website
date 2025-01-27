@@ -123,7 +123,7 @@ post:
 
 archive:
   paginate: 20 # Archive pagination. Default to 100.
-  basePath: "/archiv" # The base path of archive pages.
+  # basePath: "/archiv" # The base path of archive pages.
   # dateFormat: 01-02 # Archive date format. Default to Jan 2.
 
 analytics:
