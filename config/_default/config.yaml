@@ -1,8 +1,8 @@
-baseURL: https://hbs-skeleton.netlify.app/
-title: Hugo Bootstrap Skeleton
+baseURL: https://erik-skopp.de/
+title: Erik Skopp
 timeout: "120s"
-copyright: 'Copyright © 2016-{year} Razon Yang. All Rights Reserved.'
-defaultContentLanguage: en
+# copyright: 'Copyright © 2016-{year} Razon Yang. All Rights Reserved.'
+defaultContentLanguage: de
 # hasCJKLanguage: true # Uncomment it if your content contains Chinese/Japanese/Korean Languages.
 # defaultContentLanguageInSubdir: true
 # disableLanguages:
