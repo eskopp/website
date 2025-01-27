@@ -11,7 +11,7 @@ defaultContentLanguage: de
 #  - zh-tw
 pagination:
   pagerSize: 10
-# paginatePath: page
+  paginatePath: page
 enableRobotsTXT: true
 enableEmoji: true
 pygmentsUseClasses: true

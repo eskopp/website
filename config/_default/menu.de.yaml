@@ -1,6 +1,6 @@
 main:
-  - name: Documentations
-    identifier: documentations
-    url: https://erik-skopp.de/v1/en/docs/
+  - name: Gitlab
+    identifier: Gitlab
+    url: https://gitlab-erik-skopp.de
     params:
       icon: '<i class="fas fa-fw fa-book"></i>'
