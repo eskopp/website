@@ -29,8 +29,8 @@ build:
   writeStats: true
 
 permalinks:
-  news: /news/:year/:month/:title/
-  blog: /blog/:year/:month/:title/
+  news: /:title/
+  blog: /:title/
 
 module:
   imports:
