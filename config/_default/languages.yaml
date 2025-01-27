@@ -4,7 +4,7 @@ en:
   contentDir: content/en
 
 de:
-  languageName: English
+  languageName: Deutsch
   weight: 0
   contentDir: content/de
 
