@@ -1,6 +1,6 @@
 main:
   - name: Gitlab
     identifier: Gitlab
-    url: https://gitlab-erik-skopp.de
+    url: https://gitlab.erik-skopp.de
     params:
       icon: '<i class="fas fa-fw fa-book"></i>'
