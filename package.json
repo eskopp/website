@@ -33,7 +33,7 @@
     "devDependencies": {}
   },
   "dependencies": {
-    "@algolia/autocomplete-js": "^1.17.9",
+    "@algolia/autocomplete-js": "^1.18.0",
     "@algolia/autocomplete-theme-classic": "^1.17.9",
     "@docsearch/js": "^3.8.3",
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
