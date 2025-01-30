@@ -65,4 +65,4 @@ jobs:
           host: ${{ secrets.SSH_SERVER }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
-          script: cd /var/www/erikskopp; mv public/* .;  rm -rf public
+          script: cd /var/www/erikskopp/website; mv public/* .;  rm -rf public
