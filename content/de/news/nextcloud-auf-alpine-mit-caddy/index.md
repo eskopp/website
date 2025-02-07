@@ -30,7 +30,7 @@ fkas
 fk
 askf
 
-![DNS Eintrag](dns_eintaege.webp)
+![DNS Eintrag](dns_eintraege.webp)
 
 
 asdajfasodjoüasjdüoajsüofjaf
