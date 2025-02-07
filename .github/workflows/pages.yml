@@ -47,20 +47,20 @@ jobs:
           npm fund
           hugo mod get
           hugo mod tidy
-          hugo --minify --gc --enableGitInfo
+          hugo --minify --gc --enableGitInfo  # Builds the site and generates the 'public' folder
 
       - name: Create hugo branch and push only public folder
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          
+
           # Checkout the hugo branch or create it
           git checkout -B hugo
 
           # Clean up any previous content in the hugo branch (optional)
           rm -rf *
 
-          # Move the public folder content to the root
+          # Move the content of the public folder to the root of the repo
           mv public/* . || true
 
           # Add the public folder content to the commit
