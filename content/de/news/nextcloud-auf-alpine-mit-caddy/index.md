@@ -131,7 +131,10 @@ Für die Nextcloud-Installation benötigen wir lediglich zwei Verzeichnisse: [^3
 Diese klare Trennung sorgt für eine bessere Organisation und erleichtert zukünftige Wartungsarbeiten.
 
 ### Herunterladen von Nextcloud
-Wir laden das `latest.zip` herunter und entpacken es in den Ordner. Alpine bietet in den Docs ein `nextcloud-initscript` [^4]. Dieses macht im Grunde auch nichts anderes. Der Unterschied ist, dass das initscript noch die PHP Abhänigkeiten mitliefert. Wir müssen diese per Hand installieren.
+Zunächst laden wir die Datei `latest.zip` herunter und entpacken sie in das vorgesehene Verzeichnis. Alpine bietet in der Dokumentation ein `nextcloud-initscript`[^4], das diesen Prozess automatisiert. Im Wesentlichen führt das Skript dieselben Schritte aus, mit dem Unterschied, dass es zusätzlich die erforderlichen PHP-Abhängigkeiten installiert.
+
+Da wir das System manuell einrichten, müssen wir die benötigten PHP-Pakete selbst installieren, um sicherzustellen, dass Nextcloud reibungslos
+
 
 ## Sonstiges
 ### Titelbild
