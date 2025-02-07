@@ -84,7 +84,9 @@ nextcloud.erik-skopp.de. 182    IN      A       152.53.120.57
 ;; WHEN: Fri Feb 07 10:17:31 CET 2025
 ;; MSG SIZE  rcvd: 68
 ```
+In der Antwortsektion ist zu erkennen, dass der Server den A-Record erfolgreich aufgelöst hat. Daher können wir uns nun der Serverkonfiguration widmen.
 
-## Einrichten von Alpine
-### Grundlegendes
-sadasd
+
+## Einrichten des Servers
+### Grundlagen von Alpine
+asd
