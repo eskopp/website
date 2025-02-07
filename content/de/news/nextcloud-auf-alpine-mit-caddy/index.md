@@ -131,7 +131,8 @@ Für die Nextcloud-Installation benötigen wir lediglich zwei Verzeichnisse: [^3
 Diese klare Trennung sorgt für eine bessere Organisation und erleichtert zukünftige Wartungsarbeiten.
 
 
-
+## Sonstiges
+### Titelbild
 Das Titelbild stammt von Pixabay.[^1]
 
 [^1]: [Quelle: AI-generiert Cloud Computing Mining auf Pixabay](https://pixabay.com/de/illustrations/ai-generiert-cloud-computing-bergbau-8533603/)
