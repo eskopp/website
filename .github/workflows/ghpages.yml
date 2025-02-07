@@ -1,0 +1,53 @@
+name: Build and Deploy Hugo Project
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 'latest'
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 'latest'
+    - name: Install Hugo
+      uses: peaceiris/actions-hugo@v2
+      with:
+        hugo-version: 'latest'
+
+    - name: Install dependencies
+      run: |
+        npm update
+        hugo mod npm pack
+        npm install
+        npm audit fix
+        npm fund
+        hugo mod get
+        hugo mod tidy
+
+
+    - name: Build Hugo site
+      run: |
+        hugo --minify --gc --enableGitInfo
+
+    - name: Commit and push changes to docs branch
+      run: |
+        git checkout -b docs
+        git add -A
+        git commit -m "Deploy Hugo site"
+        git push origin docs --force
