@@ -22,14 +22,7 @@ authors:
   - ErikSkopp
 images: []
 ---
-asdasdadaldadkaskdasdas
-kda
-skd
-kas
-fkas
-fk
-askf
-
+## Setzen der DNS Einträge
 ![DNS Eintrag](dns_eintraege.webp)
 
 
