@@ -4,7 +4,7 @@ timeout: "120s"
 copyright: 'Copyright © 2023-{year} Erik Skopp. All Rights Reserved.'
 defaultContentLanguage: de
 # hasCJKLanguage: true # Uncomment it if your content contains Chinese/Japanese/Korean Languages.
-# defaultContentLanguageInSubdir: true
+# DefaultContentLanguageInSubdir: true
 # disableLanguages:
 #  - fr
 #  - zh-cn
