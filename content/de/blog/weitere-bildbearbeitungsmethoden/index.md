@@ -4,7 +4,7 @@ title: Weitere Bildbearbeitungsmethoden
 date: 2022-07-08T11:34:47+08:00
 featured: true
 draft: false
-comment: true
+comment: false
 toc: true
 reward: true
 pinned: false
@@ -27,3 +27,4 @@ Seit `v1.0.0-alpha.1` unterstützt HBS viel mehr Bildbearbeitungsmethoden. So zu
 <!--more-->
 
 Siehe auch [Bildverarbeitung] (https://hbs.razonyang.com/v1/en/docs/image-processing/).
+Original: [Original] (https://backup.erik-skopp.de/en/more-image-processing-methods/)
