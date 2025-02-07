@@ -19,10 +19,10 @@ blackfriday:
   hrefTargetBlank: true
 
 taxonomies:
-  category: Kategorien
-  series: Serien
-  tag: Tags
-  authors: Autoren
+  category: categories
+  series: series
+  tag: tags
+  authors: authors
 
 build:
   writeStats: true
