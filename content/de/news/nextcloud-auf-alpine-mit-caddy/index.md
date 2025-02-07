@@ -20,7 +20,7 @@ tags:
   - Informatik
 authors:
   - ErikSkopp
-images: ["featured-sample.webp"]
+images: []
 ---
 asdasdadaldadkaskdasdas
 kda
@@ -30,7 +30,7 @@ fkas
 fk
 askf
 
-![DNS Eintrag](subdomain_dns.webp)
+![DNS Eintrag](dns_eintaege.webp)
 
 
 asdajfasodjoüasjdüoajsüofjaf
