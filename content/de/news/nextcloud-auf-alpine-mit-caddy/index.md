@@ -12,13 +12,15 @@ carousel: true
 categories:
   - Image
 tags: 
-  - Crop
-  - Fit
-  - Fill
-  - Filters
+  - Nextcloud
+  - Alpine
+  - Sever
+  - Cloud
+  - Cadddy
+  - Informatik
 authors:
   - ErikSkopp
-images: []
+images: ["featured-sample.webp"]
 ---
 asdasdadaldadkaskdasdas
 kda
