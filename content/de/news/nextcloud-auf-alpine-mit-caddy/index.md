@@ -20,4 +20,19 @@ authors:
   - ErikSkopp
 images: []
 ---
-asdasd
+asdasdadaldadkaskdasdas
+kda
+skd
+kas
+fkas
+fk
+askf
+
+![DNS Eintrag](subdomain_dns.webp)
+
+
+asdajfasodjoüasjdüoajsüofjaf
+agj
+af
+asjdpßasjf+j
+
