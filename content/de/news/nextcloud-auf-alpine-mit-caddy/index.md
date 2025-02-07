@@ -130,6 +130,8 @@ Für die Nextcloud-Installation benötigen wir lediglich zwei Verzeichnisse: [^3
 
 Diese klare Trennung sorgt für eine bessere Organisation und erleichtert zukünftige Wartungsarbeiten.
 
+### Herunterladen von Nextcloud
+Wir laden das `latest.zip` herunter und entpacken es in den Ordner. Alpine bietet in den Docs ein `nextcloud-initscript` [^4]. Dieses macht im Grunde auch nichts anderes. Der Unterschied ist, dass das initscript noch die PHP Abhänigkeiten mitliefert. Wir müssen diese per Hand installieren.
 
 ## Sonstiges
 ### Titelbild
@@ -139,3 +141,4 @@ Das Titelbild stammt von Pixabay.[^1]
 [^2]: [Wikipedia Dig Software](https://de.wikipedia.org/wiki/Dig_(Software))
 [^3]: Diese Trennung habe ich mir vor etlichen Jahren abgeschaut und finde sie bis heute sinnvoll. Sie sorgt für eine klare Struktur, erleichtert die Verwaltung von Zugriffsrechten und verbessert die Wartbarkeit des Systems. Während sich `/home/data` ausschließlich um die Speicherung der Nutzerdaten kümmert, bleibt `/var/www/nextcloud.erik-skopp.de` auf die Anwendung selbst beschränkt. Dadurch lassen sich Backups gezielter anfertigen und Berechtigungen besser steuern.
 [Apfelcast - Nextcloud und Nginx](https://apfelcast.com/nextcloud-28-hub-7-installation-einfache-anleitung-auf-linux-server-inkl-domain-ssl/)
+[^4]:[Nextcloud im Alpine Wiki](https://wiki.alpinelinux.org/wiki/Nextcloud#Webserver)
