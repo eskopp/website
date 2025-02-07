@@ -22,6 +22,7 @@ authors:
   - ErikSkopp
 images: []
 ---
+Um überhaupt den Server über eine Domain oder Subdomain ansprechen zu können, muss ein DNS Record erstellt werden.
 ## Setzen der DNS Einträge
 ![DNS Eintrag](dns_eintraege.webp)
 
