@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - name: Change path
-        run: sed -i 's/erik-skopp.de/backup.erik-skopp.de/g' config_default/config.yaml
+        run: sed -i 's/erik-skopp.de/backup.erik-skopp.de/g' /config_default/config.yaml
 
       - name: Checkout repository
         uses: actions/checkout@v4
