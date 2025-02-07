@@ -38,17 +38,6 @@ jobs:
           hugo-version: "latest"
           extended: true
 
-      - name: Install dependencies and build the site
-        run: |
-          npm update
-          hugo mod npm pack
-          npm install
-          npm audit fix
-          npm fund
-          hugo mod get
-          hugo mod tidy
-          hugo --minify --gc --enableGitInfo  # Builds the site and generates the 'public' folder
-
       - name: Create hugo branch and push only public folder
         run: |
           git config --global user.name "github-actions[bot]"
@@ -57,10 +46,17 @@ jobs:
           # Checkout the hugo branch or create it
           git checkout -B hugo
 
-          # Clean up any previous content in the hugo branch (optional)
-          rm -rf *
-
+          npm update
+          hugo mod npm pack
+          npm install
+          npm audit fix
+          npm fund
+          hugo mod get
+          hugo mod tidy
+          hugo --minify --gc --enableGitInfo  # Builds the site and generates the 'public' folder
+          
           # Move the content of the public folder to the root of the repo
+
           mv public/* . || true
 
           # Add the public folder content to the commit
