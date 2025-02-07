@@ -90,3 +90,12 @@ In der Antwortsektion ist zu erkennen, dass der Server den A-Record erfolgreich 
 ## Einrichten des Servers
 ### Grundlagen von Alpine
 In diesem Projekt verwenden wir Alpine Linux in der Version `3.21.3`, die über die offizielle [Alpine-Downloadseite](https://alpinelinux.org/downloads/) verfügbar ist. Wir gehen davon aus, dass eine installierte und funktionsfähige Alpine-Version bereits vorhanden ist.
+
+Um Alpine aktuell zu halten und um es zu aktualisieren empfiehlt es sich ein update durchzuführen. 
+
+```sh
+apk update 
+apk upgrade  
+```
+
+Ähnlich wie bei anderen Distributionen aktualisiert `apk update` die Paketlisten und `apk upgrade` die Packages anhand der Packetlisten.
