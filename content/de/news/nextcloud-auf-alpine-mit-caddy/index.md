@@ -28,6 +28,8 @@ images: []
 
 Um den Server über eine Domain oder Subdomain erreichbar zu machen, ist die Erstellung eines entsprechenden DNS-Records erforderlich. In diesem Fall wird die Domain ``erik-skopp.de`` genutzt und eine Third-Level-Domain mit dem Namen ``nextcloud`` angelegt. Daraus ergibt sich die finale Subdomain: ``nextcloud.erik-skopp.de``.
 
+### Anlegen der Records
+
 Diese Subdomain dient ausschließlich zu Testzwecken. Nach Abschluss dieses Berichts werden sowohl der Webserver als auch die Nextcloud-Installation sowie die zugehörigen DNS-Einträge entfernt.
 
 Zur Vereinfachung werden hier nur zwei Domains verwendet:
@@ -43,6 +45,12 @@ Für dieses Projekt nutze ich einen **Netcup-Server**, der einen **/64-Adresspoo
 Da die **Link-Local-Adresse (`fe80::.../10`) nicht extern erreichbar** ist, bleibt nur die **routbare Global Unicast-Adresse**. 
 Aus dem `/64`-Adresspool habe ich die `:1` als Host-Adresse gewählt – dies geschah aus rein praktischen Gründen und hat keinen Einfluss auf den weiteren Ablauf.
 
+
 ![DNS Eintrag](dns_eintraege.webp)
 
+
+### Testen der Records
+
+a
+sdas
 
