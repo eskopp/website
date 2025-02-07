@@ -1,4 +1,4 @@
-name: Deploy German
+name: GitHub Pages
 
 on:
   push:
@@ -48,11 +48,12 @@ jobs:
           hugo mod get
           hugo mod tidy
           hugo --minify --gc --enableGitInfo
-
+      
       - name: Create hugo branch and push
         run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git checkout -b hugo
           git add -A
           git commit -m "Deploy Hugo site"
           git push origin hugo --force
-
