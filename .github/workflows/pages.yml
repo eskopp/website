@@ -37,7 +37,7 @@ jobs:
 
       - name: Change path
         run: |
-          apt-get install tree
+          sudo apt-get install tree
           ls -aril
           pwd
           tree 
