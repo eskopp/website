@@ -88,6 +88,10 @@ In der Antwortsektion ist zu erkennen, dass der Server den A-Record erfolgreich 
 
 
 ## Einrichten des Servers
+
+### Grundgedanke
+
+
 ### Grundlagen von Alpine
 In diesem Projekt verwenden wir Alpine Linux in der Version `3.21.3`, die über die offizielle [Alpine-Downloadseite](https://alpinelinux.org/downloads/) verfügbar ist. Wir gehen davon aus, dass eine installierte und funktionsfähige Alpine-Version bereits vorhanden ist.
 
@@ -99,3 +103,12 @@ apk upgrade
 ```
 
 Ähnlich wie bei anderen Distributionen aktualisiert `apk update` die Paketlisten und `apk upgrade` die Packages anhand der Packetlisten.
+
+
+
+
+
+
+Das Titelbild stammt von Pixabay.[^1]
+
+[^1]: [Quelle: AI-generiert Cloud Computing Mining auf Pixabay](https://pixabay.com/de/illustrations/ai-generiert-cloud-computing-bergbau-8533603/)
