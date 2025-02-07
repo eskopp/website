@@ -1,0 +1,58 @@
+name: Deploy German
+
+on:
+  push:
+    branches: ["main"]
+  schedule:
+    - cron: "0 0 1 * *"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set current date
+        run: echo "DATETIME=$(date +'%Y_%m_%d_%H_%M')" >> $GITHUB_ENV
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "latest"
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.23
+
+      - name: Install Hugo Extended
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "latest"
+          extended: true
+
+      - name: Install dependencies and build the site
+        run: |
+          npm update
+          hugo mod npm pack
+          npm install
+          npm audit fix
+          npm fund
+          hugo mod get
+          hugo mod tidy
+          hugo --minify --gc --enableGitInfo
+
+      - name: Create hugo branch and push
+        run: |
+          git checkout -b hugo
+          git add -A
+          git commit -m "Deploy Hugo site"
+          git push origin hugo --force
+
