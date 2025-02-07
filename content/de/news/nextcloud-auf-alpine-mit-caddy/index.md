@@ -60,3 +60,27 @@ Die Überprüfung der DNS-Einträge erfolgt auf zwei Wegen. Eine Möglichkeit bi
 > dig (Domain Information Groper) ist ein leistungsstarkes Kommandozeilen-Tool zum Abfragen von DNS-Informationen. Es wird häufig von Netzwerkadministratoren und Entwicklern [...] genutzt, um DNS-Records von Domains zu analysieren. (Quelle: verschiedene)
 
 Wir nutzen dig um mit einem CLI Tool zu prüfen ob die DNS Einträge für die Nextcloud Domain vorhanden sind. Auf Gründen der einfachheit werde ich hier nur auf den `IPv4` bzw `A-Record` eingehen, da nur dieser hier relevant ist. Für den anderen Record bedarf es keine Änderung. Auf dem Server werden beide in der Caddy Config abgefangen. 
+
+
+```bash
+> dig nextcloud.erik-skopp.de
+
+; <<>> DiG 9.18.30-0xxx <<>> nextcloud.erik-skopp.de
+;; global options: +cmd
+;; Got answer:
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 8998
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags:; udp: 512
+;; QUESTION SECTION:
+;nextcloud.erik-skopp.de.       IN      A
+
+;; ANSWER SECTION:
+nextcloud.erik-skopp.de. 182    IN      A       152.53.120.57
+
+;; Query time: 49 msec
+;; SERVER: 10.255.255.254#53(10.255.255.254) (UDP)
+;; WHEN: Fri Feb 07 10:17:31 CET 2025
+;; MSG SIZE  rcvd: 68
+```
