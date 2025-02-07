@@ -89,16 +89,16 @@ viewer: true # Image Viewer
 
 sidebar:
   fixed: true
-  # archives: true # Enable archives widget
-  # taxonomiesToggle: false # Disable taxonomy toggle
-  # categories: true # Enable categories widget
-  # tags: true # Enable tags widget
-  # series: true # Enable series widget
-  # authors: true # Enable authors widget
-  # postsToggle: false # Disable posts toggle
-  # featuredPosts: true # Enable featured posts widget
-  # recentPosts: true # Enable featured posts widget
-  # collapsed: true # Collapse sidebar widgets by default on small screens.
+  archives: true # Enable archives widget
+  taxonomiesToggle: false # Disable taxonomy toggle
+  categories: true # Enable categories widget
+  tags: true # Enable tags widget
+  series: true # Enable series widget
+  authors: true # Enable authors widget
+  postsToggle: false # Disable posts toggle
+  featuredPosts: true # Enable featured posts widget
+  recentPosts: true # Enable featured posts widget
+  collapsed: true # Collapse sidebar widgets by default on small screens.
 
 codeBlock:
   # maxLines: 8
