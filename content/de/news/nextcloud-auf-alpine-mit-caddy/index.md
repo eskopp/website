@@ -22,7 +22,10 @@ authors:
   - ErikSkopp
 images: []
 ---
-Um überhaupt den Server über eine Domain oder Subdomain ansprechen zu können, muss ein DNS Record erstellt werden. In unserem Fall haben wir die Domain ``erik-skopp``. Als third-level Domain nutzen wird ``nextcloud``. Daraus ergibt sich dann die abschließende Subdomain: ``nextcloud.erik-skopp.de``. Diese ist jedoch nur zum testen da. Nach diesem Bericht wird sowohl der Webserver als auch die Nextcloud und die DNS einträge entfernt.
+Um den Server über eine Domain oder Subdomain erreichbar zu machen, ist die Erstellung eines entsprechenden DNS-Records erforderlich. In diesem Fall wird die Domain ``erik-skopp.de`` genutzt und eine Third-Level-Domain mit dem Namen ``nextcloud`` angelegt. Daraus ergibt sich die finale Subdomain: ``nextcloud.erik-skopp.de``.
+
+Diese Subdomain dient ausschließlich zu Testzwecken. Nach Abschluss dieses Berichts werden sowohl der Webserver als auch die Nextcloud-Installation sowie die zugehörigen DNS-Einträge entfernt.
+
 
 
 ## Setzen der DNS Einträge
