@@ -20,7 +20,7 @@ blackfriday:
 
 taxonomies:
   category: categories
-  series: series
+  series: series 
   tag: tags
   authors: authors
 
