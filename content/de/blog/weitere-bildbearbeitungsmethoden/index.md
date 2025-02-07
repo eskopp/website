@@ -26,5 +26,6 @@ Seit `v1.0.0-alpha.1` unterstützt HBS viel mehr Bildbearbeitungsmethoden. So zu
 
 <!--more-->
 
-Siehe auch [Bildverarbeitung] (https://hbs.razonyang.com/v1/en/docs/image-processing/).
-Original: [Original] (https://backup.erik-skopp.de/en/more-image-processing-methods/)
+Siehe auch:
+- [Bildverarbeitung] (https://hbs.razonyang.com/v1/en/docs/image-processing/).
+- [Original] (https://backup.erik-skopp.de/en/more-image-processing-methods/)
