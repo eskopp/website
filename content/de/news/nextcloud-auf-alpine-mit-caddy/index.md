@@ -23,12 +23,12 @@ authors:
 images: []
 ---
 
-
-# DNS-Konfiguration für die Subdomain
+# Anlegen einer Nextcloud Instanz auf einem Alpine Server mit Caddy
+## DNS-Konfiguration für die Subdomain
 
 Um den Server über eine Domain oder Subdomain erreichbar zu machen, ist die Erstellung eines entsprechenden DNS-Records erforderlich. In diesem Fall wird die Domain ``erik-skopp.de`` genutzt und eine Third-Level-Domain mit dem Namen ``nextcloud`` angelegt. Daraus ergibt sich die finale Subdomain: ``nextcloud.erik-skopp.de``.
 
-## Anlegen der Records
+### Anlegen der Records
 
 Diese Subdomain dient ausschließlich zu Testzwecken. Nach Abschluss dieses Berichts werden sowohl der Webserver als auch die Nextcloud-Installation sowie die zugehörigen DNS-Einträge entfernt.
 
@@ -49,14 +49,14 @@ Aus dem `/64`-Adresspool habe ich die `:1` als Host-Adresse gewählt – dies ge
 ![DNS Eintrag](dns_eintraege.webp)
 
 
-## Testen der Records
+### Testen der Records
 
 ### DNS-Checker
 Die Überprüfung der DNS-Einträge erfolgt auf zwei Wegen. Eine Möglichkeit bietet die externe Website [DNSChecker](https://dnschecker.org/#A/nextcloud.erik-skopp.de). Dort kann die gewünschte URL eingegeben und der zu überprüfende DNS-Record ausgewählt werden. Die Ergebnisse werden übersichtlich dargestellt und zeigen, in welchen Regionen der Eintrag bereits propagiert wurde und wo er noch aussteht.
 
 ![DNS Checker](dnschecker.webp)
 
-### DIG 
+#### DIG 
 > dig (Domain Information Groper) ist ein leistungsstarkes Kommandozeilen-Tool zum Abfragen von DNS-Informationen. Es wird häufig von Netzwerkadministratoren und Entwicklern [...] genutzt, um DNS-Records von Domains zu analysieren. (Quelle: verschiedene)
 
 Wir nutzen dig um mit einem CLI Tool zu prüfen ob die DNS Einträge für die Nextcloud Domain vorhanden sind. Auf Gründen der einfachheit werde ich hier nur auf den `IPv4` bzw `A-Record` eingehen, da nur dieser hier relevant ist. Für den anderen Record bedarf es keine Änderung. Auf dem Server werden beide in der Caddy Config abgefangen. 
@@ -84,3 +84,7 @@ nextcloud.erik-skopp.de. 182    IN      A       152.53.120.57
 ;; WHEN: Fri Feb 07 10:17:31 CET 2025
 ;; MSG SIZE  rcvd: 68
 ```
+
+## Einrichten von Alpine
+### Grundlegendes
+sadasd
