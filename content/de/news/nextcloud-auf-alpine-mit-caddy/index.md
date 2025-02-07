@@ -22,12 +22,16 @@ authors:
   - ErikSkopp
 images: []
 ---
+
+
+## DNS - Einträge
 Um den Server über eine Domain oder Subdomain erreichbar zu machen, ist die Erstellung eines entsprechenden DNS-Records erforderlich. In diesem Fall wird die Domain ``erik-skopp.de`` genutzt und eine Third-Level-Domain mit dem Namen ``nextcloud`` angelegt. Daraus ergibt sich die finale Subdomain: ``nextcloud.erik-skopp.de``.
 
 Diese Subdomain dient ausschließlich zu Testzwecken. Nach Abschluss dieses Berichts werden sowohl der Webserver als auch die Nextcloud-Installation sowie die zugehörigen DNS-Einträge entfernt.
 
 
-## Setzen der DNS Einträge
+### Setzen der DNS Einträge
+Für die Subdomain werden hier aus Gründen der einfachheit nur 2 Domains. Der ``A-Record`` löst die Domain auf die IPv4 Adresse ``152.53.120.57`` auf.
 ![DNS Eintrag](dns_eintraege.webp)
 
 
