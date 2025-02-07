@@ -9,8 +9,6 @@ toc: true
 reward: true
 pinned: false
 carousel: true
-series:
-  - News
 categories:
   - Image
 tags: 
@@ -19,7 +17,7 @@ tags:
   - Fill
   - Filters
 authors:
-  - RazonYang
+  - eskopp
 images: []
 ---
 
