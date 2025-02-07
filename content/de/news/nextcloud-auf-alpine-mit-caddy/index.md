@@ -51,6 +51,9 @@ Aus dem `/64`-Adresspool habe ich die `:1` als Host-Adresse gewählt – dies ge
 
 ### Testen der Records
 
-a
-sdas
+#### DNS-Checker
+Die Überprüfung der DNS-Einträge erfolgt auf zwei Wegen. Eine Möglichkeit bietet die externe Website [DNSChecker](https://dnschecker.org/#A/nextcloud.erik-skopp.de). Dort kann die gewünschte URL eingegeben und der zu überprüfende DNS-Record ausgewählt werden. Die Ergebnisse werden übersichtlich dargestellt und zeigen, in welchen Regionen der Eintrag bereits propagiert wurde und wo er noch aussteht.
 
+![DNS Checker](dnschecker.webp)
+
+#### DIG 
