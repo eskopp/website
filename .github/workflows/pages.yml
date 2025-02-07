@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set current date
-        run: echo "DATETIME=$(date +'%Y_%m_%d_%H_%M')" >> $GITHUB_ENV
+      - name: Change path
+        run: sed -i 's/erik-skopp.de/backup.erik-skopp.de/g' config_default/config.yaml
 
       - name: Checkout repository
         uses: actions/checkout@v4
