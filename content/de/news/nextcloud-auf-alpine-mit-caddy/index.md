@@ -22,7 +22,9 @@ authors:
   - ErikSkopp
 images: []
 ---
-Um überhaupt den Server über eine Domain oder Subdomain ansprechen zu können, muss ein DNS Record erstellt werden.
+Um überhaupt den Server über eine Domain oder Subdomain ansprechen zu können, muss ein DNS Record erstellt werden. In unserem Fall haben wir die Domain ``erik-skopp``. Als third-level Domain nutzen wird ``nextcloud``. Daraus ergibt sich dann die abschließende Subdomain: ``nextcloud.erik-skopp.de``. Diese ist jedoch nur zum testen da. Nach diesem Bericht wird sowohl der Webserver als auch die Nextcloud und die DNS einträge entfernt.
+
+
 ## Setzen der DNS Einträge
 ![DNS Eintrag](dns_eintraege.webp)
 
