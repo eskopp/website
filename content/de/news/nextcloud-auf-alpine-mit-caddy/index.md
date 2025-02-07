@@ -89,4 +89,4 @@ In der Antwortsektion ist zu erkennen, dass der Server den A-Record erfolgreich 
 
 ## Einrichten des Servers
 ### Grundlagen von Alpine
-asd
+In diesem Projekt verwenden wir Alpine Linux in der Version `3.21.3`, die über die offizielle [Alpine-Downloadseite](https://alpinelinux.org/downloads/) verfügbar ist. Wir gehen davon aus, dass eine installierte und funktionsfähige Alpine-Version bereits vorhanden ist.
