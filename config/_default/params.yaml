@@ -94,10 +94,10 @@ sidebar:
   categories: true # Enable categories widget
   tags: true # Enable tags widget
   series: true # Enable series widget
-  authors: true # Enable authors widget
+  #authors: true # Enable authors widget
   postsToggle: false # Disable posts toggle
-  featuredPosts: true # Enable featured posts widget
-  recentPosts: true # Enable featured posts widget
+  #featuredPosts: true # Enable featured posts widget
+  #recentPosts: true # Enable featured posts widget
   collapsed: true # Collapse sidebar widgets by default on small screens.
 
 codeBlock:
@@ -107,7 +107,7 @@ codeBlock:
 post:
   # excerpt: description
   # excerptMaxLength: 120
-  # copyright: false # Whether to display copyright section on each post.
+  copyright: false # Whether to display copyright section on each post.
   # plainifyExcerpt: false # Format excerpt in HTML if false.
   featuredImage: true # Show the featured image above the content.
   numberifyHeadings: true # Count headings automatically.
