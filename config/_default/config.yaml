@@ -42,6 +42,9 @@ module:
 #     shortname: your-disqus-shortname
 
 markup:
+  goldmark:
+    renderer:
+      unsafe: true 
   highlight:
     guessSyntax: true
     lineNos: true
