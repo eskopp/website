@@ -48,12 +48,24 @@ jobs:
           hugo mod get
           hugo mod tidy
           hugo --minify --gc --enableGitInfo
-      
-      - name: Create hugo branch and push
+
+      - name: Create hugo branch and push only public folder
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b hugo
+          
+          # Checkout the hugo branch or create it
+          git checkout -B hugo
+
+          # Clean up any previous content in the hugo branch (optional)
+          rm -rf *
+
+          # Move the public folder content to the root
+          mv public/* . || true
+
+          # Add the public folder content to the commit
           git add -A
           git commit -m "Deploy Hugo site"
+
+          # Push changes to the hugo branch
           git push origin hugo --force
