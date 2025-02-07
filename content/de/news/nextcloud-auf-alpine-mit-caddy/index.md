@@ -136,6 +136,16 @@ Zunächst laden wir die Datei `latest.zip` herunter und entpacken sie in das vor
 Da wir das System manuell einrichten, müssen wir die benötigten PHP-Pakete selbst installieren, um sicherzustellen, dass Nextcloud reibungslos
 
 
+### Installation von PHP 8.3
+```bash 
+apk add php83 php83-fpm php83-mysqli php83-json php83-openssl \
+    php83-curl php83-gd php83-intl php83-mbstring php83-xml \
+    php83-zip php83-bcmath php83-gmp php83-exif php83-fileinfo \
+    php83-pcntl php83-posix php83-session php83-simplexml \
+    php83-tokenizer php83-iconv php83-dom php83-xmlreader \
+    php83-xmlwriter php83-pdo php83-pdo_mysql php83-opcache
+```
+
 ## Sonstiges
 ### Titelbild
 Das Titelbild stammt von Pixabay.[^1]
