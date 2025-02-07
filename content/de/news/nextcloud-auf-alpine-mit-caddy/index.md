@@ -122,7 +122,7 @@ mkdir -p nextcloud.erik-skopp.de
 cd ~
 cd nextcloud.erik-skopp.de/
 ```
-Für die Nextcloud-Installation benötigen wir lediglich zwei Verzeichnisse:
+Für die Nextcloud-Installation benötigen wir lediglich zwei Verzeichnisse: [^3]
 
 1. `/home/data` – Dieses Verzeichnis dient als Speicherort für die Nutzerdaten. Durch die Trennung von Anwendungs- und Nutzerdaten wird die Verwaltung von Zugriffsrechten vereinfacht und die Datensicherheit erhöht.
    
@@ -136,3 +136,4 @@ Das Titelbild stammt von Pixabay.[^1]
 
 [^1]: [Quelle: AI-generiert Cloud Computing Mining auf Pixabay](https://pixabay.com/de/illustrations/ai-generiert-cloud-computing-bergbau-8533603/)
 [^2]: [Wikipedia Dig Software](https://de.wikipedia.org/wiki/Dig_(Software))
+[^3]: https://apfelcast.com/nextcloud-28-hub-7-installation-einfache-anleitung-auf-linux-server-inkl-domain-ssl/
