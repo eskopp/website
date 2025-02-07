@@ -39,7 +39,7 @@ jobs:
         run: |
           ls -aril
           pwd
-          sed -i 's/erik-skopp.de/backup.erik-skopp.de/g' /config/default/config.yaml
+          sed -i 's/erik-skopp.de/backup.erik-skopp.de/g' /config/_default/config.yaml
 
       - name: Install dependencies and build the site
         run: |
