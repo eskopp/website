@@ -27,13 +27,7 @@ Um den Server über eine Domain oder Subdomain erreichbar zu machen, ist die Ers
 Diese Subdomain dient ausschließlich zu Testzwecken. Nach Abschluss dieses Berichts werden sowohl der Webserver als auch die Nextcloud-Installation sowie die zugehörigen DNS-Einträge entfernt.
 
 
-
 ## Setzen der DNS Einträge
 ![DNS Eintrag](dns_eintraege.webp)
 
-
-asdajfasodjoüasjdüoajsüofjaf
-agj
-af
-asjdpßasjf+j
 
