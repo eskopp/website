@@ -114,7 +114,21 @@ apk upgrade
 Ähnlich wie bei anderen Distributionen aktualisiert `apk update` die Paketlisten und `apk upgrade` die Packages anhand der Packetlisten.
 
 
+### Erstellen der Ordnerstruktur
+```bash
+mkdir -p /home/data
+cd /var/www
+mkdir -p nextcloud.erik-skopp.de
+cd ~
+cd nextcloud.erik-skopp.de/
+```
+Für die Nextcloud-Installation benötigen wir lediglich zwei Verzeichnisse:
 
+1. `/home/data` – Dieses Verzeichnis dient als Speicherort für die Nutzerdaten. Durch die Trennung von Anwendungs- und Nutzerdaten wird die Verwaltung von Zugriffsrechten vereinfacht und die Datensicherheit erhöht.
+   
+2. `/var/www/nextcloud.erik-skopp.de` – Hier wird die Nextcloud-Installation selbst abgelegt. Dieses Verzeichnis enthält alle erforderlichen Dateien für den Betrieb von Nextcloud.
+
+Diese klare Trennung sorgt für eine bessere Organisation und erleichtert zukünftige Wartungsarbeiten.
 
 
 
