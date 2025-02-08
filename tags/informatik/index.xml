@@ -42,53 +42,27 @@ Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adress
 <blockquote>
 <p>dig (Domain Information Groper) ist ein leistungsstarkes Kommandozeilen-Tool zum Abfragen von DNS-Informationen. Es wird häufig von Netzwerkadministratoren und Entwicklern [&hellip;] genutzt, um DNS-Records von Domains zu analysieren. (Quelle: verschiedene)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
 <p>Wir nutzen dig um mit einem CLI Tool zu prüfen ob die DNS Einträge für die Nextcloud Domain vorhanden sind. Auf Gründen der einfachheit werde ich hier nur auf den <code>IPv4</code> bzw <code>A-Record</code> eingehen, da nur dieser hier relevant ist. Für den anderen Record bedarf es keine Änderung. Auf dem Server werden beide in der Caddy Config abgefangen.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">&gt; dig nextcloud.erik-skopp.de
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">;</span> &lt;&lt;&gt;&gt; DiG 9.18.30-0xxx &lt;&lt;&gt;&gt; nextcloud.erik-skopp.de
-</span></span><span class="line"><span class="cl"><span class="p">;;</span> global options: +cmd
-</span></span><span class="line"><span class="cl"><span class="p">;;</span> Got answer:
-</span></span><span class="line"><span class="cl"><span class="p">;;</span> -&gt;&gt;HEADER<span class="s">&lt;&lt;- opcode: QUERY, status: NOERROR, id: 8998
-</span></span></span><span class="line"><span class="cl"><span class="s">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
-</span></span></span><span class="line"><span class="cl"><span class="s">
-</span></span></span><span class="line"><span class="cl"><span class="s">;; OPT PSEUDOSECTION:
-</span></span></span><span class="line"><span class="cl"><span class="s">; EDNS: version: 0, flags:; udp: 512
-</span></span></span><span class="line"><span class="cl"><span class="s">;; QUESTION SECTION:
-</span></span></span><span class="line"><span class="cl"><span class="s">;nextcloud.erik-skop</span>p.de.       IN      A
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">;;</span> ANSWER SECTION:
-</span></span><span class="line"><span class="cl">nextcloud.erik-skopp.de. <span class="m">182</span>    IN      A       152.53.120.57
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="p">;;</span> Query time: <span class="m">49</span> msec
-</span></span><span class="line"><span class="cl"><span class="p">;;</span> SERVER: 10.255.255.254#53<span class="o">(</span>10.255.255.254<span class="o">)</span> <span class="o">(</span>UDP<span class="o">)</span>
-</span></span><span class="line"><span class="cl"><span class="p">;;</span> WHEN: Fri Feb <span class="m">07</span> 10:17:31 CET <span class="m">2025</span>
-</span></span><span class="line"><span class="cl"><span class="p">;;</span> MSG SIZE  rcvd: <span class="m">68</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>In der Antwortsektion ist zu erkennen, dass der Server den A-Record erfolgreich aufgelöst hat. Daher können wir uns nun der Serverkonfiguration widmen.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln"> 1</span><span class="cl">&gt; dig nextcloud.erik-skopp.de
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">;</span> &lt;&lt;&gt;&gt; DiG 9.18.30-0xxx &lt;&lt;&gt;&gt; nextcloud.erik-skopp.de
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="p">;;</span> global options: +cmd
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="p">;;</span> Got answer:
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="p">;;</span> -&gt;&gt;HEADER<span class="s">&lt;&lt;- opcode: QUERY, status: NOERROR, id: 8998
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="s">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="s">;; OPT PSEUDOSECTION:
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="s">; EDNS: version: 0, flags:; udp: 512
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="s">;; QUESTION SECTION:
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="s">;nextcloud.erik-skop</span>p.de.       IN      A
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="p">;;</span> ANSWER SECTION:
+</span></span><span class="line"><span class="ln">15</span><span class="cl">nextcloud.erik-skopp.de. <span class="m">182</span>    IN      A       152.53.120.57
+</span></span><span class="line"><span class="ln">16</span><span class="cl">
+</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="p">;;</span> Query time: <span class="m">49</span> msec
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="p">;;</span> SERVER: 10.255.255.254#53<span class="o">(</span>10.255.255.254<span class="o">)</span> <span class="o">(</span>UDP<span class="o">)</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="p">;;</span> WHEN: Fri Feb <span class="m">07</span> 10:17:31 CET <span class="m">2025</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="p">;;</span> MSG SIZE  rcvd: <span class="m">68</span>
+</span></span></code></pre></div><p>In der Antwortsektion ist zu erkennen, dass der Server den A-Record erfolgreich aufgelöst hat. Daher können wir uns nun der Serverkonfiguration widmen.</p>
 
 <h2 id="einrichten-des-servers" data-numberify>Einrichten des Servers<a class="anchor ms-1" href="#einrichten-des-servers"></a></h2>
 
@@ -102,36 +76,17 @@ Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adress
 <h3 id="grundlagen-von-alpine" data-numberify>Grundlagen von Alpine<a class="anchor ms-1" href="#grundlagen-von-alpine"></a></h3>
 <p>In diesem Projekt verwenden wir Alpine Linux in der Version <code>3.21.3</code>, die über die offizielle <a href="https://alpinelinux.org/downloads/" target="_blank" rel="noopener noreferrer">Alpine-Downloadseite<i class="fas fa-external-link-square-alt ms-1"></i></a> verfügbar ist. Wir gehen davon aus, dass eine installierte und funktionsfähige Alpine-Version bereits vorhanden ist.</p>
 <p>Um Alpine aktuell zu halten und um es zu aktualisieren empfiehlt es sich ein update durchzuführen.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">apk update
-</span></span><span class="line"><span class="cl">apk upgrade
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Ähnlich wie bei anderen Distributionen aktualisiert <code>apk update</code> die Paketlisten und <code>apk upgrade</code> die Packages anhand der Packetlisten.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">apk update
+</span></span><span class="line"><span class="ln">2</span><span class="cl">apk upgrade
+</span></span></code></pre></div><p>Ähnlich wie bei anderen Distributionen aktualisiert <code>apk update</code> die Paketlisten und <code>apk upgrade</code> die Packages anhand der Packetlisten.</p>
 
 <h3 id="erstellen-der-ordnerstruktur" data-numberify>Erstellen der Ordnerstruktur<a class="anchor ms-1" href="#erstellen-der-ordnerstruktur"></a></h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mkdir -p /home/data
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /var/www
-</span></span><span class="line"><span class="cl">mkdir -p nextcloud.erik-skopp.de
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ~
-</span></span><span class="line"><span class="cl"><span class="nb">cd</span> nextcloud.erik-skopp.de/
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Für die Nextcloud-Installation benötigen wir lediglich zwei Verzeichnisse: <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">mkdir -p /home/data
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nb">cd</span> /var/www
+</span></span><span class="line"><span class="ln">3</span><span class="cl">mkdir -p nextcloud.erik-skopp.de
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="nb">cd</span> ~
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="nb">cd</span> nextcloud.erik-skopp.de/
+</span></span></code></pre></div><p>Für die Nextcloud-Installation benötigen wir lediglich zwei Verzeichnisse: <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
 <ol>
 <li><code>/home/data</code> – Dieses Verzeichnis dient als Speicherort für die Nutzerdaten. Durch die Trennung von Anwendungs- und Nutzerdaten wird die Verwaltung von Zugriffsrechten vereinfacht und die Datensicherheit erhöht.</li>
 <li><code>/var/www/nextcloud.erik-skopp.de</code> – Hier wird die Nextcloud-Installation selbst abgelegt. Dieses Verzeichnis enthält alle erforderlichen Dateien für den Betrieb von Nextcloud.</li>
@@ -141,238 +96,100 @@ Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adress
 <h3 id="herunterladen-von-nextcloud" data-numberify>Herunterladen von Nextcloud<a class="anchor ms-1" href="#herunterladen-von-nextcloud"></a></h3>
 <p>Zunächst laden wir die Datei <code>latest.zip</code> herunter und entpacken sie in das vorgesehene Verzeichnis. Alpine bietet in der Dokumentation ein <code>nextcloud-initscript</code><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, das diesen Prozess automatisiert. Im Wesentlichen führt das Skript dieselben Schritte aus, mit dem Unterschied, dass es zusätzlich die erforderlichen PHP-Abhängigkeiten installiert.</p>
 <p>Da wir das System manuell einrichten, müssen wir die benötigten PHP-Pakete selbst installieren, um sicherzustellen, dass Nextcloud reibungslos funktioniert.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="nb">cd</span> /var/www/nextcloud.erik-skopp.de
-</span></span><span class="line"><span class="cl">wget https://download.nextcloud.com/server/releases/latest.zip
-</span></span><span class="line"><span class="cl">unzip latest.zip
-</span></span><span class="line"><span class="cl">mv nextcloud/* .
-</span></span><span class="line"><span class="cl">rm -rf nextcloud/
-</span></span><span class="line"><span class="cl">rm latest.zip
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Mit wget laden wir das ZIP-Archiv von Nextcloud herunter. Es ist wichtig, die Version latest zu verwenden, da nur so die neuesten Sicherheitsupdates und Funktionen enthalten sind.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">cd</span> /var/www/nextcloud.erik-skopp.de
+</span></span><span class="line"><span class="ln">2</span><span class="cl">wget https://download.nextcloud.com/server/releases/latest.zip
+</span></span><span class="line"><span class="ln">3</span><span class="cl">unzip latest.zip
+</span></span><span class="line"><span class="ln">4</span><span class="cl">mv nextcloud/* .
+</span></span><span class="line"><span class="ln">5</span><span class="cl">rm -rf nextcloud/
+</span></span><span class="line"><span class="ln">6</span><span class="cl">rm latest.zip
+</span></span></code></pre></div><p>Mit wget laden wir das ZIP-Archiv von Nextcloud herunter. Es ist wichtig, die Version latest zu verwenden, da nur so die neuesten Sicherheitsupdates und Funktionen enthalten sind.</p>
 <p>Anschließend entpacken wir das ZIP-Archiv, wodurch die Dateien in einem zusätzlichen Unterordner nextcloud abgelegt werden. Da dieser zusätzliche Ordner nicht benötigt wird, verschieben wir den Inhalt direkt in unseren Zielordner nextcloud.erik-skopp.de. Abschließend löschen wir das ursprüngliche latest.zip-Archiv sowie den nun leeren nextcloud-Ordner.</p>
 <p>Nun sollte das ganze in etwa so aussehen:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">localhost:/var/www/nextcloud.erik-skopp.de# ls
-</span></span><span class="line"><span class="cl">3rdparty           apps               console.php        index.html         ocs                public.php         status.php
-</span></span><span class="line"><span class="cl">AUTHORS            composer.json      core               index.php          ocs-provider       remote.php         themes
-</span></span><span class="line"><span class="cl">COPYING            composer.lock      cron.php           lib                package-lock.json  resources          updater
-</span></span><span class="line"><span class="cl">LICENSES           config             dist               occ                package.json       robots.txt         version.php
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">localhost:/var/www/nextcloud.erik-skopp.de# ls
+</span></span><span class="line"><span class="ln">2</span><span class="cl">3rdparty           apps               console.php        index.html         ocs                public.php         status.php
+</span></span><span class="line"><span class="ln">3</span><span class="cl">AUTHORS            composer.json      core               index.php          ocs-provider       remote.php         themes
+</span></span><span class="line"><span class="ln">4</span><span class="cl">COPYING            composer.lock      cron.php           lib                package-lock.json  resources          updater
+</span></span><span class="line"><span class="ln">5</span><span class="cl">LICENSES           config             dist               occ                package.json       robots.txt         version.php
+</span></span></code></pre></div>
 <h3 id="installation-von-php-83" data-numberify>Installation von PHP 8.3<a class="anchor ms-1" href="#installation-von-php-83"></a></h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apk add php83 php83-fpm php83-mysqli php83-json php83-openssl <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    php83-curl php83-gd php83-intl php83-mbstring php83-xml <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    php83-zip php83-bcmath php83-gmp php83-exif php83-fileinfo <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    php83-pcntl php83-posix php83-session php83-simplexml <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    php83-tokenizer php83-iconv php83-dom php83-xmlreader <span class="se">\
-</span></span></span><span class="line"><span class="cl"><span class="se"></span>    php83-xmlwriter php83-pdo php83-pdo_mysql php83-opcache
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Um PHP allein nutzen zu können, reicht es aus, den Befehl <code>apk add php83 php83-fpm</code> auszuführen. Nextcloud erfordert jedoch zusätzliche PHP-Erweiterungen für seine Kernfunktionen und Plugins. Um nicht jede Erweiterung einzeln zu installieren, kann man mit diesem Befehl die wichtigsten Extensions direkt hinzufügen.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">apk add php83 php83-fpm php83-mysqli php83-json php83-openssl <span class="se">\
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="se"></span>    php83-curl php83-gd php83-intl php83-mbstring php83-xml <span class="se">\
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="se"></span>    php83-zip php83-bcmath php83-gmp php83-exif php83-fileinfo <span class="se">\
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="se"></span>    php83-pcntl php83-posix php83-session php83-simplexml <span class="se">\
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="se"></span>    php83-tokenizer php83-iconv php83-dom php83-xmlreader <span class="se">\
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="se"></span>    php83-xmlwriter php83-pdo php83-pdo_mysql php83-opcache
+</span></span></code></pre></div><p>Um PHP allein nutzen zu können, reicht es aus, den Befehl <code>apk add php83 php83-fpm</code> auszuführen. Nextcloud erfordert jedoch zusätzliche PHP-Erweiterungen für seine Kernfunktionen und Plugins. Um nicht jede Erweiterung einzeln zu installieren, kann man mit diesem Befehl die wichtigsten Extensions direkt hinzufügen.</p>
 
 <h3 id="installation-von-caddy" data-numberify>Installation von Caddy<a class="anchor ms-1" href="#installation-von-caddy"></a></h3>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">apk add caddy
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Caddy ist ein moderner, leistungsstarker Webserver und Reverse Proxy, der sich durch einfache Konfiguration, automatische HTTPS-Unterstützung und geringe Systemanforderungen auszeichnet. Er ist in Go geschrieben und wird oft als Alternative zu Nginx oder Apache verwendet.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">apk add caddy
+</span></span></code></pre></div><p>Caddy ist ein moderner, leistungsstarker Webserver und Reverse Proxy, der sich durch einfache Konfiguration, automatische HTTPS-Unterstützung und geringe Systemanforderungen auszeichnet. Er ist in Go geschrieben und wird oft als Alternative zu Nginx oder Apache verwendet.</p>
 <p>Wie alle Webserver basiert Caddy auf Konfigurationsdateien, die nun bearbeitet werden müssen. Ein wesentlicher Unterschied zu Apache und Nginx besteht darin, dass Caddy die Verwaltung von SSL/TLS-Zertifikaten automatisch übernimmt. <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rc-service caddy start
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>In Alpine müssen alle sockets und Dienste manuell gestartet werden. Man kann das einfach mit <code>systemctl caddy start</code> aus Debian 12 vergleichen. Ohne den Start ist Caddy nicht nutzbasr. Debian nutzt systemd und Alpine nutzt OpenRC.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">rc-service caddy start
+</span></span></code></pre></div><p>In Alpine müssen alle sockets und Dienste manuell gestartet werden. Man kann das einfach mit <code>systemctl caddy start</code> aus Debian 12 vergleichen. Ohne den Start ist Caddy nicht nutzbasr. Debian nutzt systemd und Alpine nutzt OpenRC.</p>
 
 <h3 id="einrichten-von-caddy" data-numberify>Einrichten von Caddy<a class="anchor ms-1" href="#einrichten-von-caddy"></a></h3>
 <p>Die Konfigurationsdatei von Caddy befindet sich unter <code>/etc/caddy/Caddyfile</code> und kann als normale Textdatei bearbeitet werden. Dafür eignet sich nano, alternativ kann auch vim oder ein anderer Editor verwendet werden.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nano /etc/caddy/Caddyfile
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Diese <code>Caddyfile</code> definiert die Konfiguration für die Domain <code>nextcloud.erik-skopp.de</code> und stellt sicher, dass Nextcloud über Caddy als Webserver korrekt betrieben wird.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-Caddy" data-lang="Caddy"><span class="line"><span class="cl"><span class="c1"># Caddy&#39;s configuration file
-</span></span></span><span class="line"><span class="cl"><span class="c1"># see: https://caddyserver.com/docs/caddyfile
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="cl"><span class="gh">nextcloud.erik-skopp.de</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">root</span> <span class="nd">*</span> <span class="s">/var/www/nextcloud.erik-skopp.de</span>
-</span></span><span class="line"><span class="cl">        <span class="k">file_server</span>
-</span></span><span class="line"><span class="cl">        <span class="k">php_fastcgi</span> <span class="s">unix//run/php-fpm83/php-fpm.sock</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">header</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">Strict-Transport-Security</span> <span class="s2">&#34;max-age=31536000; includeSubDomains; preload&#34;</span>
-</span></span><span class="line"><span class="cl">                <span class="k">Referrer-Policy</span> <span class="s2">&#34;no-referrer&#34;</span>
-</span></span><span class="line"><span class="cl">                <span class="k">X-Content-Type-Options</span> <span class="s2">&#34;nosniff&#34;</span>
-</span></span><span class="line"><span class="cl">                <span class="k">X-Frame-Options</span> <span class="s2">&#34;SAMEORIGIN&#34;</span>
-</span></span><span class="line"><span class="cl">                <span class="k">X-XSS-Protection</span> <span class="s2">&#34;1; mode=block&#34;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Diese Caddyfile definiert die Konfiguration für die Domain <code>nextcloud.erik-skopp.de</code> und stellt sicher, dass Nextcloud über Caddy als Webserver korrekt betrieben wird.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">nano /etc/caddy/Caddyfile
+</span></span></code></pre></div><p>Diese <code>Caddyfile</code> definiert die Konfiguration für die Domain <code>nextcloud.erik-skopp.de</code> und stellt sicher, dass Nextcloud über Caddy als Webserver korrekt betrieben wird.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Caddy" data-lang="Caddy"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1"># Caddy&#39;s configuration file
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"># see: https://caddyserver.com/docs/caddyfile
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="gh">nextcloud.erik-skopp.de</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="k">root</span> <span class="nd">*</span> <span class="s">/var/www/nextcloud.erik-skopp.de</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="k">file_server</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="k">php_fastcgi</span> <span class="s">unix//run/php-fpm83/php-fpm.sock</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="k">header</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">                <span class="k">Strict-Transport-Security</span> <span class="s2">&#34;max-age=31536000; includeSubDomains; preload&#34;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">                <span class="k">Referrer-Policy</span> <span class="s2">&#34;no-referrer&#34;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">                <span class="k">X-Content-Type-Options</span> <span class="s2">&#34;nosniff&#34;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">                <span class="k">X-Frame-Options</span> <span class="s2">&#34;SAMEORIGIN&#34;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">                <span class="k">X-XSS-Protection</span> <span class="s2">&#34;1; mode=block&#34;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>Diese Caddyfile definiert die Konfiguration für die Domain <code>nextcloud.erik-skopp.de</code> und stellt sicher, dass Nextcloud über Caddy als Webserver korrekt betrieben wird.</p>
 <p>Zunächst wird die Domain <code>nextcloud.erik-skopp.de</code> als Hostname festgelegt, sodass Caddy Anfragen für diese Domain verarbeitet. Danach wird das <code>Root-Verzeichnis</code> für Nextcloud auf <code>/var/www/nextcloud.erik-skopp.de</code> gesetzt, wodurch alle statischen Dateien und PHP-Skripte von dort geladen werden. Die Zeile <code>file_server</code> aktiviert den Dateiserver von Caddy, sodass statische Inhalte wie Bilder, CSS und JavaScript direkt ausgeliefert werden können.</p>
 <p>Für die PHP-Verarbeitung wird <code>php_fastcgi unix//run/php-fpm83/php-fpm.sock</code> verwendet. Dadurch werden PHP-Anfragen an einen PHP-FPM 8.3 Socket weitergeleitet, was für die korrekte Ausführung von Nextcloud erforderlich ist.</p>
 <p>Zusätzlich werden mehrere <code>Sicherheits-Header</code> gesetzt, um die Nextcloud-Instanz besser abzusichern. <code>Strict-Transport-Security</code> (HSTS) sorgt dafür, dass HTTPS für ein Jahr erzwungen wird und auch Subdomains betrifft. <code>Referrer-Policy</code> verhindert, dass der Browser Referrer-Informationen an externe Seiten sendet. <code>X-Content-Type-Options</code> unterbindet das MIME-Type-Sniffing und erschwert so Angriffe. <code>X-Frame-Options</code> schützt vor Clickjacking, indem das Einbetten der Seite in Frames blockiert wird. Schließlich aktiviert <code>X-XSS-Protection</code> den XSS-Schutz im Browser.</p>
 <p>Diese <code>Caddyfile</code> ermöglicht eine sichere und optimierte Bereitstellung von Nextcloud auf der Domain <code>nextcloud.erik-skopp.de</code>. Caddy übernimmt die Verwaltung von <code>statischen Dateien</code>, <code>PHP-Verarbeitung</code> und <code>Sicherheitsmechanismen</code>, wodurch eine stabile und geschützte Umgebung für Nextcloud gewährleistet wird.</p>
 <p>Wenn die Config fertig ist, kann man sie formatieren. Dies sollte man tun, da sonst OpenRC sich beschwert.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">caddy fmt --overwrite /etc/caddy/Caddyfile
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Anschließend muss Caddy neu gestartet werden. Dies ist wichtig, damit er die Config neu einliest.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rc-service caddy restart
-</span></span></code></pre></td></tr></table>
-</div>
-</div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">caddy fmt --overwrite /etc/caddy/Caddyfile
+</span></span></code></pre></div><p>Anschließend muss Caddy neu gestartet werden. Dies ist wichtig, damit er die Config neu einliest.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">rc-service caddy restart
+</span></span></code></pre></div>
 <h3 id="aktivieren-von-php83" data-numberify>Aktivieren von PHP8.3<a class="anchor ms-1" href="#aktivieren-von-php83"></a></h3>
 <p>Das starten von PHP8.3 hat sich immer als etwas schwierig herausgestellt.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rc-update add php-fpm83 default
-</span></span><span class="line"><span class="cl">rc-service php-fpm83 restart
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Jetzt geht es um die PHP config</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nano /etc/php83/php-fpm.d/www.conf
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>Anschließend sind einige Anpassungen in der Datei <code>/etc/php83/php-fpm.d/www.conf</code> erforderlich. Ich empfehle, die Datei vollständig zu löschen, da nur wenige Konfigurationen benötigt werden. Diese werde ich nun im Detail erläutern.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>www<span class="o">]</span>
-</span></span><span class="line"><span class="cl"><span class="p">;</span><span class="nv">listen</span> <span class="o">=</span> 127.0.0.1:9000
-</span></span><span class="line"><span class="cl"><span class="p">;</span><span class="nv">user</span> <span class="o">=</span> nobody
-</span></span><span class="line"><span class="cl"><span class="p">;</span><span class="c1">#group = nobody</span>
-</span></span><span class="line"><span class="cl"><span class="p">;</span><span class="c1">#listen.owner = nobody</span>
-</span></span><span class="line"><span class="cl"><span class="p">;</span>listen.group <span class="o">=</span> nobody
-</span></span><span class="line"><span class="cl"><span class="p">;</span>listen.mode <span class="o">=</span> <span class="m">0666</span>
-</span></span><span class="line"><span class="cl"><span class="p">;</span><span class="nv">pm</span> <span class="o">=</span> dynamic
-</span></span><span class="line"><span class="cl"><span class="p">;</span>pm.max_children <span class="o">=</span> <span class="m">50</span>
-</span></span><span class="line"><span class="cl"><span class="p">;</span>pm.start_servers <span class="o">=</span> <span class="m">5</span>
-</span></span><span class="line"><span class="cl"><span class="p">;</span>pm.min_spare_servers <span class="o">=</span> <span class="m">5</span>
-</span></span><span class="line"><span class="cl"><span class="p">;</span>pm.max_spare_servers <span class="o">=</span> <span class="m">35</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="nv">user</span> <span class="o">=</span> caddy
-</span></span><span class="line"><span class="cl"><span class="nv">group</span> <span class="o">=</span> caddy
-</span></span><span class="line"><span class="cl"><span class="nv">listen</span> <span class="o">=</span> /run/php-fpm83/php-fpm.sock
-</span></span><span class="line"><span class="cl">listen.owner <span class="o">=</span> caddy
-</span></span><span class="line"><span class="cl">listen.group <span class="o">=</span> caddy
-</span></span><span class="line"><span class="cl">listen.mode <span class="o">=</span> <span class="m">0660</span>
-</span></span><span class="line"><span class="cl"><span class="nv">pm</span> <span class="o">=</span> dynamic
-</span></span><span class="line"><span class="cl">pm.max_children <span class="o">=</span> <span class="m">10</span>
-</span></span><span class="line"><span class="cl">pm.start_servers <span class="o">=</span> <span class="m">2</span>
-</span></span><span class="line"><span class="cl">pm.min_spare_servers <span class="o">=</span> <span class="m">1</span>
-</span></span><span class="line"><span class="cl">pm.max_spare_servers <span class="o">=</span> <span class="m">5</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">rc-update add php-fpm83 default
+</span></span><span class="line"><span class="ln">2</span><span class="cl">rc-service php-fpm83 restart
+</span></span></code></pre></div><p>Jetzt geht es um die PHP config</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">nano /etc/php83/php-fpm.d/www.conf
+</span></span></code></pre></div><p>Anschließend sind einige Anpassungen in der Datei <code>/etc/php83/php-fpm.d/www.conf</code> erforderlich. Ich empfehle, die Datei vollständig zu löschen, da nur wenige Konfigurationen benötigt werden. Diese werde ich nun im Detail erläutern.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="o">[</span>www<span class="o">]</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="p">;</span><span class="nv">listen</span> <span class="o">=</span> 127.0.0.1:9000
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">;</span><span class="nv">user</span> <span class="o">=</span> nobody
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="p">;</span><span class="c1">#group = nobody</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="p">;</span><span class="c1">#listen.owner = nobody</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="p">;</span>listen.group <span class="o">=</span> nobody
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="p">;</span>listen.mode <span class="o">=</span> <span class="m">0666</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="p">;</span><span class="nv">pm</span> <span class="o">=</span> dynamic
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="p">;</span>pm.max_children <span class="o">=</span> <span class="m">50</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="p">;</span>pm.start_servers <span class="o">=</span> <span class="m">5</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="p">;</span>pm.min_spare_servers <span class="o">=</span> <span class="m">5</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="p">;</span>pm.max_spare_servers <span class="o">=</span> <span class="m">35</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl">
+</span></span><span class="line"><span class="ln">15</span><span class="cl"><span class="nv">user</span> <span class="o">=</span> caddy
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="nv">group</span> <span class="o">=</span> caddy
+</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="nv">listen</span> <span class="o">=</span> /run/php-fpm83/php-fpm.sock
+</span></span><span class="line"><span class="ln">18</span><span class="cl">listen.owner <span class="o">=</span> caddy
+</span></span><span class="line"><span class="ln">19</span><span class="cl">listen.group <span class="o">=</span> caddy
+</span></span><span class="line"><span class="ln">20</span><span class="cl">listen.mode <span class="o">=</span> <span class="m">0660</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl"><span class="nv">pm</span> <span class="o">=</span> dynamic
+</span></span><span class="line"><span class="ln">22</span><span class="cl">pm.max_children <span class="o">=</span> <span class="m">10</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">pm.start_servers <span class="o">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">pm.min_spare_servers <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">pm.max_spare_servers <span class="o">=</span> <span class="m">5</span>
+</span></span></code></pre></div><blockquote>
 <p>Ich habe die alte config oben als Kommentar in der Datei beibehalten. Das macht das Fehler debugging einfacher.
 Die Konfiguration für <code>PHP-FPM 8.3</code> setzt verschiedene Parameter für den Betrieb des PHP-Prozesses unter dem Benutzer <code>caddy</code>. Die einzelnen Zeilen haben folgende Bedeutung:</p></blockquote>
 <ul>
