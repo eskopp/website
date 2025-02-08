@@ -1,6 +1,6 @@
 ---
 # type: docs
-title: Nextcloud auf Alpine mit Caddy
+title: Nextcloud mit Alpine und Caddy
 date: 2025-02-07T06:34:17+01:00
 featured: true
 draft: false
