@@ -35,15 +35,15 @@ Diese Subdomain dient ausschließlich zu Testzwecken. Nach Abschluss dieses Beri
 
 Zur Vereinfachung werden hier nur zwei Domains verwendet:
 
-- Der **A-Record** weist die Domain der IPv4-Adresse `152.53.120.57` zu.
-- Der **AAAA-Record** löst `nextcloud.erik-skopp.de` auf IPv6 auf, nämlich auf `2a0a:4cc0:c0:4540::1`.
+- Der `A-Record` weist die Domain der IPv4-Adresse `152.53.120.57` zu.
+- Der `AAAA-Record` löst `nextcloud.erik-skopp.de` auf IPv6 auf, nämlich auf `2a0a:4cc0:c0:4540::1`.
 
-Für dieses Projekt nutze ich einen **Netcup-Server**, der einen **/64-Adresspool** bereitstellt. Konkret sind dies:
+Für dieses Projekt nutze ich einen `Netcup-Server`, der einen `/64-Adresspool` bereitstellt. Konkret sind dies:
 
-- **Link-Local-Adresse:** `fe80::a8cb:d0ff:fe50:ab47/10` (nicht von außen erreichbar)
-- **Global Unicast-Subnetz:** `2a0a:4cc0:c0:4540::/64` (öffentlich routbar)
+- `Link-Local-Adresse:` `fe80::a8cb:d0ff:fe50:ab47/10` (nicht von außen erreichbar)
+- `Global Unicast-Subnetz:` `2a0a:4cc0:c0:4540::/64` (öffentlich routbar)
 
-Da die **Link-Local-Adresse (`fe80::.../10`) nicht extern erreichbar** ist, bleibt nur die **routbare Global Unicast-Adresse**.
+Da die `Link-Local-Adresse (`fe80::.../10`) nicht extern erreichbar` ist, bleibt nur die `routbare Global Unicast-Adresse`.
 Aus dem `/64`-Adresspool habe ich die `:1` als Host-Adresse gewählt – dies geschah aus rein praktischen Gründen und hat keinen Einfluss auf den weiteren Ablauf.
 
 ![DNS Eintrag](dns_eintraege.webp)
@@ -192,6 +192,9 @@ Die Konfigurationsdatei von Caddy befindet sich unter `/etc/caddy/Caddyfile` und
 ```bash
 nano /etc/caddy/Caddyfile
 ```
+
+Diese `Caddyfile` definiert die Konfiguration für die Domain `nextcloud.erik-skopp.de` und stellt sicher, dass Nextcloud über Caddy als Webserver korrekt betrieben wird.
+
 ```Caddy
 # Caddy's configuration file
 # see: https://caddyserver.com/docs/caddyfile
@@ -209,8 +212,19 @@ nextcloud.erik-skopp.de {
                 X-XSS-Protection "1; mode=block"
         }
 }
-
 ```
+
+Diese Caddyfile definiert die Konfiguration für die Domain `nextcloud.erik-skopp.de` und stellt sicher, dass Nextcloud über Caddy als Webserver korrekt betrieben wird. 
+
+Zunächst wird die Domain `nextcloud.erik-skopp.de` als Hostname festgelegt, sodass Caddy Anfragen für diese Domain verarbeitet. Danach wird das `Root-Verzeichnis` für Nextcloud auf `/var/www/nextcloud.erik-skopp.de` gesetzt, wodurch alle statischen Dateien und PHP-Skripte von dort geladen werden. Die Zeile `file_server` aktiviert den Dateiserver von Caddy, sodass statische Inhalte wie Bilder, CSS und JavaScript direkt ausgeliefert werden können. 
+
+Für die PHP-Verarbeitung wird `php_fastcgi unix//run/php-fpm83/php-fpm.sock` verwendet. Dadurch werden PHP-Anfragen an einen PHP-FPM 8.3 Socket weitergeleitet, was für die korrekte Ausführung von Nextcloud erforderlich ist. 
+
+Zusätzlich werden mehrere `Sicherheits-Header` gesetzt, um die Nextcloud-Instanz besser abzusichern. `Strict-Transport-Security` (HSTS) sorgt dafür, dass HTTPS für ein Jahr erzwungen wird und auch Subdomains betrifft. `Referrer-Policy` verhindert, dass der Browser Referrer-Informationen an externe Seiten sendet. `X-Content-Type-Options` unterbindet das MIME-Type-Sniffing und erschwert so Angriffe. `X-Frame-Options` schützt vor Clickjacking, indem das Einbetten der Seite in Frames blockiert wird. Schließlich aktiviert `X-XSS-Protection` den XSS-Schutz im Browser. 
+
+Diese `Caddyfile` ermöglicht eine sichere und optimierte Bereitstellung von Nextcloud auf der Domain `nextcloud.erik-skopp.de`. Caddy übernimmt die Verwaltung von `statischen Dateien`, `PHP-Verarbeitung` und `Sicherheitsmechanismen`, wodurch eine stabile und geschützte Umgebung für Nextcloud gewährleistet wird. 
+
+
 
 
 ## Sonstiges
