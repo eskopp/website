@@ -282,6 +282,20 @@ Zuerst installieren wir mit apk die Packages:</p>
 <p>Der Fehler kann einfach behoben werden:</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">chown -R caddy:caddy /var/www/nextcloud.erik-skopp.de
 </span></span></code></pre></div>
+<h3 id="nextcloud-configurieren" data-numberify>Nextcloud configurieren<a class="anchor ms-1" href="#nextcloud-configurieren"></a></h3>
+<p><picture><img class="img-fluid " alt="Daten Eintragen" src="/nextcloud-auf-alpine-mit-caddy/daten_eintragen.png" loading="lazy" width="713" height="682" />
+</picture>
+
+</p>
+<p>Bitte geben Sie alle erforderlichen Daten ein. Nach der Eingabe erfolgt die automatische Installation von Nextcloud, und die Einrichtung ist abgeschlossen.</p>
+
+<h3 id="fertig" data-numberify>Fertig.<a class="anchor ms-1" href="#fertig"></a></h3>
+<p><picture><img class="img-fluid " alt="alt text" src="/nextcloud-auf-alpine-mit-caddy/image.png" loading="lazy" width="651" height="482" />
+</picture>
+
+</p>
+<p>Nun können Sie Nextcloud nutzen.</p>
+
 <h2 id="sonstiges" data-numberify>Sonstiges<a class="anchor ms-1" href="#sonstiges"></a></h2>
 
 <h3 id="titelbild" data-numberify>Titelbild<a class="anchor ms-1" href="#titelbild"></a></h3>
