@@ -59,7 +59,7 @@
     "workbox-cacheable-response": "^6.4.2",
     "workbox-expiration": "^6.4.2",
     "workbox-precaching": "^7.3.0",
-    "workbox-routing": "^6.4.2",
+    "workbox-routing": "^7.3.0",
     "workbox-strategies": "^6.4.2"
   },
   "devDependencies": {},
