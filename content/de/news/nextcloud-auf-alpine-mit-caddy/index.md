@@ -145,6 +145,7 @@ mv nextcloud/* .
 rm -rf nextcloud/
 rm latest.zip
 ```
+
 Mit wget laden wir das ZIP-Archiv von Nextcloud herunter. Es ist wichtig, die Version latest zu verwenden, da nur so die neuesten Sicherheitsupdates und Funktionen enthalten sind.
 
 Anschließend entpacken wir das ZIP-Archiv, wodurch die Dateien in einem zusätzlichen Unterordner nextcloud abgelegt werden. Da dieser zusätzliche Ordner nicht benötigt wird, verschieben wir den Inhalt direkt in unseren Zielordner nextcloud.erik-skopp.de. Abschließend löschen wir das ursprüngliche latest.zip-Archiv sowie den nun leeren nextcloud-Ordner.
@@ -158,6 +159,7 @@ AUTHORS            composer.json      core               index.php          ocs-
 COPYING            composer.lock      cron.php           lib                package-lock.json  resources          updater
 LICENSES           config             dist               occ                package.json       robots.txt         version.php
 ```
+
 ### Installation von PHP 8.3
 
 ```bash
@@ -184,9 +186,11 @@ Wie alle Webserver basiert Caddy auf Konfigurationsdateien, die nun bearbeitet w
 ```bash
 rc-service caddy start
 ```
+
 In Alpine müssen alle sockets und Dienste manuell gestartet werden. Man kann das einfach mit `systemctl caddy start` aus Debian 12 vergleichen. Ohne den Start ist Caddy nicht nutzbasr. Debian nutzt systemd und Alpine nutzt OpenRC.
 
 ### Einrichten von Caddy
+
 Die Konfigurationsdatei von Caddy befindet sich unter `/etc/caddy/Caddyfile` und kann als normale Textdatei bearbeitet werden. Dafür eignet sich nano, alternativ kann auch vim oder ein anderer Editor verwendet werden.
 
 ```bash
@@ -214,18 +218,33 @@ nextcloud.erik-skopp.de {
 }
 ```
 
-Diese Caddyfile definiert die Konfiguration für die Domain `nextcloud.erik-skopp.de` und stellt sicher, dass Nextcloud über Caddy als Webserver korrekt betrieben wird. 
+Diese Caddyfile definiert die Konfiguration für die Domain `nextcloud.erik-skopp.de` und stellt sicher, dass Nextcloud über Caddy als Webserver korrekt betrieben wird.
 
-Zunächst wird die Domain `nextcloud.erik-skopp.de` als Hostname festgelegt, sodass Caddy Anfragen für diese Domain verarbeitet. Danach wird das `Root-Verzeichnis` für Nextcloud auf `/var/www/nextcloud.erik-skopp.de` gesetzt, wodurch alle statischen Dateien und PHP-Skripte von dort geladen werden. Die Zeile `file_server` aktiviert den Dateiserver von Caddy, sodass statische Inhalte wie Bilder, CSS und JavaScript direkt ausgeliefert werden können. 
+Zunächst wird die Domain `nextcloud.erik-skopp.de` als Hostname festgelegt, sodass Caddy Anfragen für diese Domain verarbeitet. Danach wird das `Root-Verzeichnis` für Nextcloud auf `/var/www/nextcloud.erik-skopp.de` gesetzt, wodurch alle statischen Dateien und PHP-Skripte von dort geladen werden. Die Zeile `file_server` aktiviert den Dateiserver von Caddy, sodass statische Inhalte wie Bilder, CSS und JavaScript direkt ausgeliefert werden können.
 
-Für die PHP-Verarbeitung wird `php_fastcgi unix//run/php-fpm83/php-fpm.sock` verwendet. Dadurch werden PHP-Anfragen an einen PHP-FPM 8.3 Socket weitergeleitet, was für die korrekte Ausführung von Nextcloud erforderlich ist. 
+Für die PHP-Verarbeitung wird `php_fastcgi unix//run/php-fpm83/php-fpm.sock` verwendet. Dadurch werden PHP-Anfragen an einen PHP-FPM 8.3 Socket weitergeleitet, was für die korrekte Ausführung von Nextcloud erforderlich ist.
 
-Zusätzlich werden mehrere `Sicherheits-Header` gesetzt, um die Nextcloud-Instanz besser abzusichern. `Strict-Transport-Security` (HSTS) sorgt dafür, dass HTTPS für ein Jahr erzwungen wird und auch Subdomains betrifft. `Referrer-Policy` verhindert, dass der Browser Referrer-Informationen an externe Seiten sendet. `X-Content-Type-Options` unterbindet das MIME-Type-Sniffing und erschwert so Angriffe. `X-Frame-Options` schützt vor Clickjacking, indem das Einbetten der Seite in Frames blockiert wird. Schließlich aktiviert `X-XSS-Protection` den XSS-Schutz im Browser. 
+Zusätzlich werden mehrere `Sicherheits-Header` gesetzt, um die Nextcloud-Instanz besser abzusichern. `Strict-Transport-Security` (HSTS) sorgt dafür, dass HTTPS für ein Jahr erzwungen wird und auch Subdomains betrifft. `Referrer-Policy` verhindert, dass der Browser Referrer-Informationen an externe Seiten sendet. `X-Content-Type-Options` unterbindet das MIME-Type-Sniffing und erschwert so Angriffe. `X-Frame-Options` schützt vor Clickjacking, indem das Einbetten der Seite in Frames blockiert wird. Schließlich aktiviert `X-XSS-Protection` den XSS-Schutz im Browser.
 
-Diese `Caddyfile` ermöglicht eine sichere und optimierte Bereitstellung von Nextcloud auf der Domain `nextcloud.erik-skopp.de`. Caddy übernimmt die Verwaltung von `statischen Dateien`, `PHP-Verarbeitung` und `Sicherheitsmechanismen`, wodurch eine stabile und geschützte Umgebung für Nextcloud gewährleistet wird. 
+Diese `Caddyfile` ermöglicht eine sichere und optimierte Bereitstellung von Nextcloud auf der Domain `nextcloud.erik-skopp.de`. Caddy übernimmt die Verwaltung von `statischen Dateien`, `PHP-Verarbeitung` und `Sicherheitsmechanismen`, wodurch eine stabile und geschützte Umgebung für Nextcloud gewährleistet wird.
 
+Wenn die Config fertig ist, kann man sie formatieren. Dies sollte man tun, da sonst OpenRC sich beschwert.
+```bash
+caddy fmt --overwrite /etc/caddy/Caddyfile
+```
 
+Anschließend muss Caddy neu gestartet werden. Dies ist wichtig, damit er die Config neu einliest. 
+```bash
+c-service caddy restart
+```
+### Aktivieren von PHP8.3
 
+Das starten von PHP8.3 hat sich immer als etwas schwierig herausgestellt.
+
+```bash
+rc-update add php-fpm83 default
+rc-service php-fpm83 restart
+```
 
 ## Sonstiges
 
