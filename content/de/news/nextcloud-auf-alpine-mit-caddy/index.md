@@ -368,15 +368,28 @@ EXIT
 > Bitte ändern Sie das Passowrt
 
 ## Nextcloud im Browser
+
 ### Can't write into config directory!
 
 ![Cant write](cant_write.pngs)
 
-Der Fehler kann einfach behoben werden: 
+Der Fehler kann einfach behoben werden:
+
 ```bash
 chown -R caddy:caddy /var/www/nextcloud.erik-skopp.de
 ```
 
+### Nextcloud configurieren
+
+![Daten Eintragen](daten_eintragen.png)
+
+Bitte geben Sie alle erforderlichen Daten ein. Nach der Eingabe erfolgt die automatische Installation von Nextcloud, und die Einrichtung ist abgeschlossen.
+
+### Fertig.
+
+![alt text](image.png)
+
+Nun können Sie Nextcloud nutzen.
 
 ## Sonstiges
 
