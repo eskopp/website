@@ -254,7 +254,33 @@ nano /etc/php83/php-fpm.d/www.conf
 Anschließend sind einige Anpassungen in der Datei `/etc/php83/php-fpm.d/www.conf` erforderlich. Ich empfehle, die Datei vollständig zu löschen, da nur wenige Konfigurationen benötigt werden. Diese werde ich nun im Detail erläutern.
 
 
-nano 
+```bash
+[www]
+;listen = 127.0.0.1:9000
+;user = nobody
+;#group = nobody
+;#listen.owner = nobody
+;listen.group = nobody
+;listen.mode = 0666
+;pm = dynamic
+;pm.max_children = 50
+;pm.start_servers = 5
+;pm.min_spare_servers = 5
+;pm.max_spare_servers = 35
+
+
+user = caddy
+group = caddy
+listen = /run/php-fpm83/php-fpm.sock
+listen.owner = caddy
+listen.group = caddy
+listen.mode = 0660
+pm = dynamic
+pm.max_children = 10
+pm.start_servers = 2
+pm.min_spare_servers = 1
+pm.max_spare_servers = 5
+```
 
 ## Sonstiges
 
