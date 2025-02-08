@@ -286,7 +286,7 @@ pm.max_spare_servers = 5
 ```
 
 > Ich habe die alte config oben als Kommentar in der Datei beibehalten. Das macht das Fehler debugging einfacher.
-Die Konfiguration für `PHP-FPM 8.3` setzt verschiedene Parameter für den Betrieb des PHP-Prozesses unter dem Benutzer `caddy`. Die einzelnen Zeilen haben folgende Bedeutung:
+> Die Konfiguration für `PHP-FPM 8.3` setzt verschiedene Parameter für den Betrieb des PHP-Prozesses unter dem Benutzer `caddy`. Die einzelnen Zeilen haben folgende Bedeutung:
 
 - `user = caddy` und `group = caddy`  
   Diese Zeilen legen fest, dass `PHP-FPM` als der Benutzer `caddy` in der Gruppe `caddy` ausgeführt wird. Dies ist wichtig, um eine saubere Rechteverwaltung zu gewährleisten und sicherzustellen, dass `PHP`-Prozesse unter dem Webserver-Benutzer laufen.
@@ -336,13 +336,15 @@ Die Umstellung auf eine **Unix-Socket-Datei** (`/run/php-fpm83/php-fpm.sock`) wu
 
 Durch diese Änderungen wird `PHP-FPM` effizienter, sicherer und performanter in die `Webserver-Umgebung` integriert.
 
-### Maria DB für Nextcloud 
-Dieser Block kann schnell abgehandelt werden, da es sehr einfach ist. 
+### Maria DB für Nextcloud
+
+Dieser Block kann schnell abgehandelt werden, da es sehr einfach ist.
 Zuerst installieren wir mit apk die Packages:
 
 ```bash
 apk add nextcloud-mysql mariadb mariadb-client
 ```
+
 Anschließend führen wir einen Neustart des MariaDB-Stacks durch:
 
 ```bash
@@ -351,6 +353,7 @@ service mariadb start
 rc-update add mariadb
 mysql_secure_installation
 ```
+
 Da MySQL/MariaDB nun konfiguriert ist, können wir den Dienst starten und die Datenbanken anlegen.
 
 ```sql
@@ -361,6 +364,7 @@ GRANT ALL ON nextcloud.* TO 'mycloud'@'localhost.localdomain' IDENTIFIED BY 'sic
 FLUSH PRIVILEGES;
 EXIT
 ```
+
 > Bitte ändern Sie das Passowrt
 
 ## Sonstiges
