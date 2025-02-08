@@ -372,7 +372,9 @@ Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adress
 </span></span><span class="line"><span class="cl">pm.max_spare_servers <span class="o">=</span> <span class="m">5</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>
+</div><blockquote>
+<p>Ich habe</p></blockquote>
+
 <h2 id="sonstiges" data-numberify>Sonstiges<a class="anchor ms-1" href="#sonstiges"></a></h2>
 
 <h3 id="titelbild" data-numberify>Titelbild<a class="anchor ms-1" href="#titelbild"></a></h3>
