@@ -95,8 +95,22 @@ Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adress
 
 <h3 id="herunterladen-von-nextcloud" data-numberify>Herunterladen von Nextcloud<a class="anchor ms-1" href="#herunterladen-von-nextcloud"></a></h3>
 <p>Zunächst laden wir die Datei <code>latest.zip</code> herunter und entpacken sie in das vorgesehene Verzeichnis. Alpine bietet in der Dokumentation ein <code>nextcloud-initscript</code><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, das diesen Prozess automatisiert. Im Wesentlichen führt das Skript dieselben Schritte aus, mit dem Unterschied, dass es zusätzlich die erforderlichen PHP-Abhängigkeiten installiert.</p>
-<p>Da wir das System manuell einrichten, müssen wir die benötigten PHP-Pakete selbst installieren, um sicherzustellen, dass Nextcloud reibungslos</p>
-
+<p>Da wir das System manuell einrichten, müssen wir die benötigten PHP-Pakete selbst installieren, um sicherzustellen, dass Nextcloud reibungslos funktioniert.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl"><span class="nb">cd</span> /var/www/nextcloud.erik-skopp.de
+</span></span><span class="line"><span class="ln">2</span><span class="cl">wget https://download.nextcloud.com/server/releases/latest.zip
+</span></span><span class="line"><span class="ln">3</span><span class="cl">unzip latest.zip
+</span></span><span class="line"><span class="ln">4</span><span class="cl">mv nextcloud/* .
+</span></span><span class="line"><span class="ln">5</span><span class="cl">rm -rf nextcloud/
+</span></span><span class="line"><span class="ln">6</span><span class="cl">rm latest.zip
+</span></span></code></pre></div><p>Mit wget laden wir das ZIP-Archiv von Nextcloud herunter. Es ist wichtig, die Version latest zu verwenden, da nur so die neuesten Sicherheitsupdates und Funktionen enthalten sind.</p>
+<p>Anschließend entpacken wir das ZIP-Archiv, wodurch die Dateien in einem zusätzlichen Unterordner nextcloud abgelegt werden. Da dieser zusätzliche Ordner nicht benötigt wird, verschieben wir den Inhalt direkt in unseren Zielordner nextcloud.erik-skopp.de. Abschließend löschen wir das ursprüngliche latest.zip-Archiv sowie den nun leeren nextcloud-Ordner.</p>
+<p>Nun sollte das ganze in etwa so aussehen:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">localhost:/var/www/nextcloud.erik-skopp.de# ls
+</span></span><span class="line"><span class="ln">2</span><span class="cl">3rdparty           apps               console.php        index.html         ocs                public.php         status.php
+</span></span><span class="line"><span class="ln">3</span><span class="cl">AUTHORS            composer.json      core               index.php          ocs-provider       remote.php         themes
+</span></span><span class="line"><span class="ln">4</span><span class="cl">COPYING            composer.lock      cron.php           lib                package-lock.json  resources          updater
+</span></span><span class="line"><span class="ln">5</span><span class="cl">LICENSES           config             dist               occ                package.json       robots.txt         version.php
+</span></span></code></pre></div>
 <h3 id="installation-von-php-83" data-numberify>Installation von PHP 8.3<a class="anchor ms-1" href="#installation-von-php-83"></a></h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">apk add php83 php83-fpm php83-mysqli php83-json php83-openssl <span class="se">\
 </span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="se"></span>    php83-curl php83-gd php83-intl php83-mbstring php83-xml <span class="se">\
@@ -110,7 +124,29 @@ Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adress
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">apk add caddy
 </span></span></code></pre></div><p>Caddy ist ein moderner, leistungsstarker Webserver und Reverse Proxy, der sich durch einfache Konfiguration, automatische HTTPS-Unterstützung und geringe Systemanforderungen auszeichnet. Er ist in Go geschrieben und wird oft als Alternative zu Nginx oder Apache verwendet.</p>
 <p>Wie alle Webserver basiert Caddy auf Konfigurationsdateien, die nun bearbeitet werden müssen. Ein wesentlicher Unterschied zu Apache und Nginx besteht darin, dass Caddy die Verwaltung von SSL/TLS-Zertifikaten automatisch übernimmt. <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">rc-service caddy start
+</span></span></code></pre></div><p>In Alpine müssen alle sockets und Dienste manuell gestartet werden. Man kann das einfach mit <code>systemctl caddy start</code> aus Debian 12 vergleichen. Ohne den Start ist Caddy nicht nutzbasr. Debian nutzt systemd und Alpine nutzt OpenRC.</p>
 
+<h3 id="einrichten-von-caddy" data-numberify>Einrichten von Caddy<a class="anchor ms-1" href="#einrichten-von-caddy"></a></h3>
+<p>Die Konfigurationsdatei von Caddy befindet sich unter <code>/etc/caddy/Caddyfile</code> und kann als normale Textdatei bearbeitet werden. Dafür eignet sich nano, alternativ kann auch vim oder ein anderer Editor verwendet werden.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">nano /etc/caddy/Caddyfile
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Caddy" data-lang="Caddy"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1"># Caddy&#39;s configuration file
+</span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"># see: https://caddyserver.com/docs/caddyfile
+</span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="gh">georg.erik-skopp.de</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="k">root</span> <span class="nd">*</span> <span class="s">/var/www/nextcloud.erik-skopp.de</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="k">file_server</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="k">php_fastcgi</span> <span class="s">unix//run/php-fpm83/php-fpm.sock</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="k">header</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">                <span class="k">Strict-Transport-Security</span> <span class="s2">&#34;max-age=31536000; includeSubDomains; preload&#34;</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">                <span class="k">Referrer-Policy</span> <span class="s2">&#34;no-referrer&#34;</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">                <span class="k">X-Content-Type-Options</span> <span class="s2">&#34;nosniff&#34;</span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">                <span class="k">X-Frame-Options</span> <span class="s2">&#34;SAMEORIGIN&#34;</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">                <span class="k">X-XSS-Protection</span> <span class="s2">&#34;1; mode=block&#34;</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="ln">16</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div>
 <h2 id="sonstiges" data-numberify>Sonstiges<a class="anchor ms-1" href="#sonstiges"></a></h2>
 
 <h3 id="titelbild" data-numberify>Titelbild<a class="anchor ms-1" href="#titelbild"></a></h3>
