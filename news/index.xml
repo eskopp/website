@@ -133,7 +133,7 @@ Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adress
 </span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Caddy" data-lang="Caddy"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="c1"># Caddy&#39;s configuration file
 </span></span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="c1"># see: https://caddyserver.com/docs/caddyfile
 </span></span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="c1"></span>
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="gh">georg.erik-skopp.de</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="gh">nextcloud.erik-skopp.de</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln"> 5</span><span class="cl">        <span class="k">root</span> <span class="nd">*</span> <span class="s">/var/www/nextcloud.erik-skopp.de</span>
 </span></span><span class="line"><span class="ln"> 6</span><span class="cl">        <span class="k">file_server</span>
 </span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="k">php_fastcgi</span> <span class="s">unix//run/php-fpm83/php-fpm.sock</span>
