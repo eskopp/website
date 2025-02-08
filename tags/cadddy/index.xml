@@ -290,7 +290,7 @@ Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adress
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">c-service caddy restart
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">rc-service caddy restart
 </span></span></code></pre></td></tr></table>
 </div>
 </div>
@@ -306,7 +306,18 @@ Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adress
 </span></span><span class="line"><span class="cl">rc-service php-fpm83 restart
 </span></span></code></pre></td></tr></table>
 </div>
+</div><p>Jetzt geht es um die PHP config</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nano /etc/php83/php-fpm.d/www.conf
+</span></span></code></pre></td></tr></table>
 </div>
+</div><p>Anschließend sind einige Anpassungen in der Datei <code>/etc/php83/php-fpm.d/www.conf</code> erforderlich. Ich empfehle, die Datei vollständig zu löschen, da nur wenige Konfigurationen benötigt werden. Diese werde ich nun im Detail erläutern.</p>
+<p>nano</p>
+
 <h2 id="sonstiges" data-numberify>Sonstiges<a class="anchor ms-1" href="#sonstiges"></a></h2>
 
 <h3 id="titelbild" data-numberify>Titelbild<a class="anchor ms-1" href="#titelbild"></a></h3>
