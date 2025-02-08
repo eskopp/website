@@ -367,6 +367,17 @@ EXIT
 
 > Bitte ändern Sie das Passowrt
 
+## Nextcloud im Browser
+### Can't write into config directory!
+
+![Cant write](cant_write.pngs)
+
+Der Fehler kann einfach behoben werden: 
+```bash
+chown -R caddy:caddy /var/www/nextcloud.erik-skopp.de
+```
+
+
 ## Sonstiges
 
 ### Titelbild
