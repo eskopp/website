@@ -196,7 +196,7 @@ nano /etc/caddy/Caddyfile
 # Caddy's configuration file
 # see: https://caddyserver.com/docs/caddyfile
 
-georg.erik-skopp.de {
+nextcloud.erik-skopp.de {
         root * /var/www/nextcloud.erik-skopp.de
         file_server
         php_fastcgi unix//run/php-fpm83/php-fpm.sock
