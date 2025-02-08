@@ -152,7 +152,16 @@ Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adress
 <p>Für die PHP-Verarbeitung wird <code>php_fastcgi unix//run/php-fpm83/php-fpm.sock</code> verwendet. Dadurch werden PHP-Anfragen an einen PHP-FPM 8.3 Socket weitergeleitet, was für die korrekte Ausführung von Nextcloud erforderlich ist.</p>
 <p>Zusätzlich werden mehrere <code>Sicherheits-Header</code> gesetzt, um die Nextcloud-Instanz besser abzusichern. <code>Strict-Transport-Security</code> (HSTS) sorgt dafür, dass HTTPS für ein Jahr erzwungen wird und auch Subdomains betrifft. <code>Referrer-Policy</code> verhindert, dass der Browser Referrer-Informationen an externe Seiten sendet. <code>X-Content-Type-Options</code> unterbindet das MIME-Type-Sniffing und erschwert so Angriffe. <code>X-Frame-Options</code> schützt vor Clickjacking, indem das Einbetten der Seite in Frames blockiert wird. Schließlich aktiviert <code>X-XSS-Protection</code> den XSS-Schutz im Browser.</p>
 <p>Diese <code>Caddyfile</code> ermöglicht eine sichere und optimierte Bereitstellung von Nextcloud auf der Domain <code>nextcloud.erik-skopp.de</code>. Caddy übernimmt die Verwaltung von <code>statischen Dateien</code>, <code>PHP-Verarbeitung</code> und <code>Sicherheitsmechanismen</code>, wodurch eine stabile und geschützte Umgebung für Nextcloud gewährleistet wird.</p>
-
+<p>Wenn die Config fertig ist, kann man sie formatieren. Dies sollte man tun, da sonst OpenRC sich beschwert.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">caddy fmt --overwrite /etc/caddy/Caddyfile
+</span></span></code></pre></div><p>Anschließend muss Caddy neu gestartet werden. Dies ist wichtig, damit er die Config neu einliest.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">c-service caddy restart
+</span></span></code></pre></div>
+<h3 id="aktivieren-von-php83" data-numberify>Aktivieren von PHP8.3<a class="anchor ms-1" href="#aktivieren-von-php83"></a></h3>
+<p>Das starten von PHP8.3 hat sich immer als etwas schwierig herausgestellt.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">rc-update add php-fpm83 default
+</span></span><span class="line"><span class="ln">2</span><span class="cl">rc-service php-fpm83 restart
+</span></span></code></pre></div>
 <h2 id="sonstiges" data-numberify>Sonstiges<a class="anchor ms-1" href="#sonstiges"></a></h2>
 
 <h3 id="titelbild" data-numberify>Titelbild<a class="anchor ms-1" href="#titelbild"></a></h3>
