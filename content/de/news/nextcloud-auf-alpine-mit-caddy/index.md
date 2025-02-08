@@ -371,7 +371,7 @@ EXIT
 
 ### Can't write into config directory!
 
-![Cant write](cant_write.pngs)
+![Cant write](cant_write.png)
 
 Der Fehler kann einfach behoben werden:
 
