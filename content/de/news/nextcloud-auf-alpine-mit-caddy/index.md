@@ -135,8 +135,29 @@ Diese klare Trennung sorgt für eine bessere Organisation und erleichtert zukün
 
 Zunächst laden wir die Datei `latest.zip` herunter und entpacken sie in das vorgesehene Verzeichnis. Alpine bietet in der Dokumentation ein `nextcloud-initscript`[^4], das diesen Prozess automatisiert. Im Wesentlichen führt das Skript dieselben Schritte aus, mit dem Unterschied, dass es zusätzlich die erforderlichen PHP-Abhängigkeiten installiert.
 
-Da wir das System manuell einrichten, müssen wir die benötigten PHP-Pakete selbst installieren, um sicherzustellen, dass Nextcloud reibungslos
+Da wir das System manuell einrichten, müssen wir die benötigten PHP-Pakete selbst installieren, um sicherzustellen, dass Nextcloud reibungslos funktioniert.
 
+```bash
+cd /var/www/nextcloud.erik-skopp.de
+wget https://download.nextcloud.com/server/releases/latest.zip
+unzip latest.zip
+mv nextcloud/* .
+rm -rf nextcloud/
+rm latest.zip
+```
+Mit wget laden wir das ZIP-Archiv von Nextcloud herunter. Es ist wichtig, die Version latest zu verwenden, da nur so die neuesten Sicherheitsupdates und Funktionen enthalten sind.
+
+Anschließend entpacken wir das ZIP-Archiv, wodurch die Dateien in einem zusätzlichen Unterordner nextcloud abgelegt werden. Da dieser zusätzliche Ordner nicht benötigt wird, verschieben wir den Inhalt direkt in unseren Zielordner nextcloud.erik-skopp.de. Abschließend löschen wir das ursprüngliche latest.zip-Archiv sowie den nun leeren nextcloud-Ordner.
+
+Nun sollte das ganze in etwa so aussehen:
+
+```bash
+localhost:/var/www/nextcloud.erik-skopp.de# ls
+3rdparty           apps               console.php        index.html         ocs                public.php         status.php
+AUTHORS            composer.json      core               index.php          ocs-provider       remote.php         themes
+COPYING            composer.lock      cron.php           lib                package-lock.json  resources          updater
+LICENSES           config             dist               occ                package.json       robots.txt         version.php
+```
 ### Installation von PHP 8.3
 
 ```bash
@@ -159,6 +180,38 @@ apk add caddy
 Caddy ist ein moderner, leistungsstarker Webserver und Reverse Proxy, der sich durch einfache Konfiguration, automatische HTTPS-Unterstützung und geringe Systemanforderungen auszeichnet. Er ist in Go geschrieben und wird oft als Alternative zu Nginx oder Apache verwendet.
 
 Wie alle Webserver basiert Caddy auf Konfigurationsdateien, die nun bearbeitet werden müssen. Ein wesentlicher Unterschied zu Apache und Nginx besteht darin, dass Caddy die Verwaltung von SSL/TLS-Zertifikaten automatisch übernimmt. [^5]
+
+```bash
+rc-service caddy start
+```
+In Alpine müssen alle sockets und Dienste manuell gestartet werden. Man kann das einfach mit `systemctl caddy start` aus Debian 12 vergleichen. Ohne den Start ist Caddy nicht nutzbasr. Debian nutzt systemd und Alpine nutzt OpenRC.
+
+### Einrichten von Caddy
+Die Konfigurationsdatei von Caddy befindet sich unter `/etc/caddy/Caddyfile` und kann als normale Textdatei bearbeitet werden. Dafür eignet sich nano, alternativ kann auch vim oder ein anderer Editor verwendet werden.
+
+```bash
+nano /etc/caddy/Caddyfile
+```
+```Caddy
+# Caddy's configuration file
+# see: https://caddyserver.com/docs/caddyfile
+
+georg.erik-skopp.de {
+        root * /var/www/nextcloud.erik-skopp.de
+        file_server
+        php_fastcgi unix//run/php-fpm83/php-fpm.sock
+
+        header {
+                Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+                Referrer-Policy "no-referrer"
+                X-Content-Type-Options "nosniff"
+                X-Frame-Options "SAMEORIGIN"
+                X-XSS-Protection "1; mode=block"
+        }
+}
+
+```
+
 
 ## Sonstiges
 
