@@ -272,6 +272,16 @@ Zuerst installieren wir mit apk die Packages:</p>
 </span></span></span></code></pre></div><blockquote>
 <p>Bitte ändern Sie das Passowrt</p></blockquote>
 
+<h2 id="nextcloud-im-browser" data-numberify>Nextcloud im Browser<a class="anchor ms-1" href="#nextcloud-im-browser"></a></h2>
+
+<h3 id="cant-write-into-config-directory" data-numberify>Can’t write into config directory!<a class="anchor ms-1" href="#cant-write-into-config-directory"></a></h3>
+<p><picture><img class="img-fluid " alt="Cant write" src="" loading="lazy" />
+</picture>
+
+</p>
+<p>Der Fehler kann einfach behoben werden:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">chown -R caddy:caddy /var/www/nextcloud.erik-skopp.de
+</span></span></code></pre></div>
 <h2 id="sonstiges" data-numberify>Sonstiges<a class="anchor ms-1" href="#sonstiges"></a></h2>
 
 <h3 id="titelbild" data-numberify>Titelbild<a class="anchor ms-1" href="#titelbild"></a></h3>
