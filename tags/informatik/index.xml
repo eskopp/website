@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Tags/Informatik on Erik Skopp</title><link>https://backup.erik-skopp.de/tags/informatik/</link><description>Recent content in Tags/Informatik on Erik Skopp</description><generator>Hugo</generator><language>de</language><copyright>Copyright © 2023-2025 Erik Skopp. All Rights Reserved.</copyright><lastBuildDate>Fri, 07 Feb 2025 06:34:17 +0100</lastBuildDate><atom:link href="https://backup.erik-skopp.de/tags/informatik/index.xml" rel="self" type="application/rss+xml"/><item><title>Nextcloud auf Alpine mit Caddy</title><link>https://backup.erik-skopp.de/nextcloud-auf-alpine-mit-caddy/</link><pubDate>Fri, 07 Feb 2025 06:34:17 +0100</pubDate><guid>https://backup.erik-skopp.de/nextcloud-auf-alpine-mit-caddy/</guid><description><![CDATA[<h1 id="anlegen-einer-nextcloud-instanz-auf-einem-alpine-server-mit-caddy" data-numberify>Anlegen einer Nextcloud Instanz auf einem Alpine Server mit Caddy<a class="anchor ms-1" href="#anlegen-einer-nextcloud-instanz-auf-einem-alpine-server-mit-caddy"></a></h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Tags/Informatik on Erik Skopp</title><link>https://backup.erik-skopp.de/tags/informatik/</link><description>Recent content in Tags/Informatik on Erik Skopp</description><generator>Hugo</generator><language>de</language><copyright>Copyright © 2023-2025 Erik Skopp. All Rights Reserved.</copyright><lastBuildDate>Fri, 07 Feb 2025 06:34:17 +0100</lastBuildDate><atom:link href="https://backup.erik-skopp.de/tags/informatik/index.xml" rel="self" type="application/rss+xml"/><item><title>Nextcloud mit Alpine und Caddy</title><link>https://backup.erik-skopp.de/nextcloud-mit-alpine-und-caddy/</link><pubDate>Fri, 07 Feb 2025 06:34:17 +0100</pubDate><guid>https://backup.erik-skopp.de/nextcloud-mit-alpine-und-caddy/</guid><description><![CDATA[<h1 id="anlegen-einer-nextcloud-instanz-auf-einem-alpine-server-mit-caddy" data-numberify>Anlegen einer Nextcloud Instanz auf einem Alpine Server mit Caddy<a class="anchor ms-1" href="#anlegen-einer-nextcloud-instanz-auf-einem-alpine-server-mit-caddy"></a></h1>
 
 <h2 id="dns-konfiguration-für-die-subdomain" data-numberify>DNS-Konfiguration für die Subdomain<a class="anchor ms-1" href="#dns-konfiguration-für-die-subdomain"></a></h2>
 <p>Um den Server über eine Domain oder Subdomain erreichbar zu machen, ist die Erstellung eines entsprechenden DNS-Records erforderlich. In diesem Fall wird die Domain <code>erik-skopp.de</code> genutzt und eine Third-Level-Domain mit dem Namen <code>nextcloud</code> angelegt. Daraus ergibt sich die finale Subdomain: <code>nextcloud.erik-skopp.de</code>.</p>
@@ -24,7 +24,7 @@
 </ul>
 <p>Da die <code>Link-Local-Adresse (</code>fe80::&hellip;/10<code>) nicht extern erreichbar</code> ist, bleibt nur die <code>routbare Global Unicast-Adresse</code>.
 Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adresse gewählt – dies geschah aus rein praktischen Gründen und hat keinen Einfluss auf den weiteren Ablauf.</p>
-<p><picture><img class="img-fluid " alt="DNS Eintrag" src="/nextcloud-auf-alpine-mit-caddy/dns_eintraege.webp" loading="lazy" width="837" height="100" />
+<p><picture><img class="img-fluid " alt="DNS Eintrag" src="/nextcloud-mit-alpine-und-caddy/dns_eintraege.webp" loading="lazy" width="837" height="100" />
 </picture>
 
 </p>
@@ -33,7 +33,7 @@ Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adress
 
 <h3 id="dns-checker" data-numberify>DNS-Checker<a class="anchor ms-1" href="#dns-checker"></a></h3>
 <p>Die Überprüfung der DNS-Einträge erfolgt auf zwei Wegen. Eine Möglichkeit bietet die externe Website <a href="https://dnschecker.org/#A/nextcloud.erik-skopp.de" target="_blank" rel="noopener noreferrer">DNSChecker<i class="fas fa-external-link-square-alt ms-1"></i></a>. Dort kann die gewünschte URL eingegeben und der zu überprüfende DNS-Record ausgewählt werden. Die Ergebnisse werden übersichtlich dargestellt und zeigen, in welchen Regionen der Eintrag bereits propagiert wurde und wo er noch aussteht.</p>
-<p><picture><img class="img-fluid " alt="DNS Checker" src="/nextcloud-auf-alpine-mit-caddy/dnschecker.webp" loading="lazy" width="1580" height="768" />
+<p><picture><img class="img-fluid " alt="DNS Checker" src="/nextcloud-mit-alpine-und-caddy/dnschecker.webp" loading="lazy" width="1580" height="768" />
 </picture>
 
 </p>
@@ -487,7 +487,7 @@ Zuerst installieren wir mit apk die Packages:</p>
 <h2 id="nextcloud-im-browser" data-numberify>Nextcloud im Browser<a class="anchor ms-1" href="#nextcloud-im-browser"></a></h2>
 
 <h3 id="cant-write-into-config-directory" data-numberify>Can’t write into config directory!<a class="anchor ms-1" href="#cant-write-into-config-directory"></a></h3>
-<p><picture><img class="img-fluid " alt="Cant write" src="/nextcloud-auf-alpine-mit-caddy/cant_write.png" loading="lazy" width="743" height="308" />
+<p><picture><img class="img-fluid " alt="Cant write" src="/nextcloud-mit-alpine-und-caddy/cant_write.png" loading="lazy" width="743" height="308" />
 </picture>
 
 </p>
@@ -502,14 +502,14 @@ Zuerst installieren wir mit apk die Packages:</p>
 </div>
 </div>
 <h3 id="nextcloud-configurieren" data-numberify>Nextcloud configurieren<a class="anchor ms-1" href="#nextcloud-configurieren"></a></h3>
-<p><picture><img class="img-fluid " alt="Daten Eintragen" src="/nextcloud-auf-alpine-mit-caddy/daten_eintragen.png" loading="lazy" width="713" height="682" />
+<p><picture><img class="img-fluid " alt="Daten Eintragen" src="/nextcloud-mit-alpine-und-caddy/daten_eintragen.png" loading="lazy" width="713" height="682" />
 </picture>
 
 </p>
 <p>Bitte geben Sie alle erforderlichen Daten ein. Nach der Eingabe erfolgt die automatische Installation von Nextcloud, und die Einrichtung ist abgeschlossen.</p>
 
 <h3 id="fertig" data-numberify>Fertig.<a class="anchor ms-1" href="#fertig"></a></h3>
-<p><picture><img class="img-fluid " alt="alt text" src="/nextcloud-auf-alpine-mit-caddy/image.png" loading="lazy" width="651" height="482" />
+<p><picture><img class="img-fluid " alt="alt text" src="/nextcloud-mit-alpine-und-caddy/image.png" loading="lazy" width="651" height="482" />
 </picture>
 
 </p>
@@ -540,4 +540,4 @@ Zuerst installieren wir mit apk die Packages:</p>
 </li>
 </ol>
 </div>
-]]></content:encoded><enclosure url="https://backup.erik-skopp.de/nextcloud-auf-alpine-mit-caddy/featured-sample.webp" length="176444" type="image/webp"/></item></channel></rss>
+]]></content:encoded><enclosure url="https://backup.erik-skopp.de/nextcloud-mit-alpine-und-caddy/featured-sample.webp" length="176444" type="image/webp"/></item></channel></rss>
