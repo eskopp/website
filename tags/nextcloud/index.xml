@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Tags/Nextcloud on Erik Skopp</title><link>https://backup.erik-skopp.de/tags/nextcloud/</link><description>Recent content in Tags/Nextcloud on Erik Skopp</description><generator>Hugo</generator><language>de</language><copyright>Copyright © 2023-2025 Erik Skopp. All Rights Reserved.</copyright><lastBuildDate>Fri, 07 Feb 2025 06:34:17 +0100</lastBuildDate><atom:link href="https://backup.erik-skopp.de/tags/nextcloud/index.xml" rel="self" type="application/rss+xml"/><item><title>Nextcloud auf Alpine mit Caddy</title><link>https://backup.erik-skopp.de/nextcloud-auf-alpine-mit-caddy/</link><pubDate>Fri, 07 Feb 2025 06:34:17 +0100</pubDate><guid>https://backup.erik-skopp.de/nextcloud-auf-alpine-mit-caddy/</guid><description><![CDATA[<h1 id="anlegen-einer-nextcloud-instanz-auf-einem-alpine-server-mit-caddy" data-numberify>Anlegen einer Nextcloud Instanz auf einem Alpine Server mit Caddy<a class="anchor ms-1" href="#anlegen-einer-nextcloud-instanz-auf-einem-alpine-server-mit-caddy"></a></h1>
+
+<h2 id="dns-konfiguration-für-die-subdomain" data-numberify>DNS-Konfiguration für die Subdomain<a class="anchor ms-1" href="#dns-konfiguration-für-die-subdomain"></a></h2>
+<p>Um den Server über eine Domain oder Subdomain erreichbar zu machen, ist die Erstellung eines entsprechenden DNS-Records erforderlich. In diesem Fall wird die Domain <code>erik-skopp.de</code> genutzt und eine Third-Level-Domain mit dem Namen <code>nextcloud</code> angelegt. Daraus ergibt sich die finale Subdomain: <code>nextcloud.erik-skopp.de</code>.</p>
+
+<h3 id="anlegen-der-records" data-numberify>Anlegen der Records<a class="anchor ms-1" href="#anlegen-der-records"></a></h3>
+<p>Diese Subdomain dient ausschließlich zu Testzwecken. Nach Abschluss dieses Berichts werden sowohl der Webserver als auch die Nextcloud-Installation sowie die zugehörigen DNS-Einträge entfernt.</p>]]></description><content:encoded><![CDATA[
+<h1 id="anlegen-einer-nextcloud-instanz-auf-einem-alpine-server-mit-caddy" data-numberify>Anlegen einer Nextcloud Instanz auf einem Alpine Server mit Caddy<a class="anchor ms-1" href="#anlegen-einer-nextcloud-instanz-auf-einem-alpine-server-mit-caddy"></a></h1>
+
+<h2 id="dns-konfiguration-für-die-subdomain" data-numberify>DNS-Konfiguration für die Subdomain<a class="anchor ms-1" href="#dns-konfiguration-für-die-subdomain"></a></h2>
+<p>Um den Server über eine Domain oder Subdomain erreichbar zu machen, ist die Erstellung eines entsprechenden DNS-Records erforderlich. In diesem Fall wird die Domain <code>erik-skopp.de</code> genutzt und eine Third-Level-Domain mit dem Namen <code>nextcloud</code> angelegt. Daraus ergibt sich die finale Subdomain: <code>nextcloud.erik-skopp.de</code>.</p>
+
+<h3 id="anlegen-der-records" data-numberify>Anlegen der Records<a class="anchor ms-1" href="#anlegen-der-records"></a></h3>
+<p>Diese Subdomain dient ausschließlich zu Testzwecken. Nach Abschluss dieses Berichts werden sowohl der Webserver als auch die Nextcloud-Installation sowie die zugehörigen DNS-Einträge entfernt.</p>
+<p>Zur Vereinfachung werden hier nur zwei Domains verwendet:</p>
+<ul>
+<li>Der <strong>A-Record</strong> weist die Domain der IPv4-Adresse <code>152.53.120.57</code> zu.</li>
+<li>Der <strong>AAAA-Record</strong> löst <code>nextcloud.erik-skopp.de</code> auf IPv6 auf, nämlich auf <code>2a0a:4cc0:c0:4540::1</code>.</li>
+</ul>
+<p>Für dieses Projekt nutze ich einen <strong>Netcup-Server</strong>, der einen <strong>/64-Adresspool</strong> bereitstellt. Konkret sind dies:</p>
+<ul>
+<li><strong>Link-Local-Adresse:</strong> <code>fe80::a8cb:d0ff:fe50:ab47/10</code> (nicht von außen erreichbar)</li>
+<li><strong>Global Unicast-Subnetz:</strong> <code>2a0a:4cc0:c0:4540::/64</code> (öffentlich routbar)</li>
+</ul>
+<p>Da die <strong>Link-Local-Adresse (<code>fe80::.../10</code>) nicht extern erreichbar</strong> ist, bleibt nur die <strong>routbare Global Unicast-Adresse</strong>.
+Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adresse gewählt – dies geschah aus rein praktischen Gründen und hat keinen Einfluss auf den weiteren Ablauf.</p>
+<p><picture><img class="img-fluid " alt="DNS Eintrag" src="/nextcloud-auf-alpine-mit-caddy/dns_eintraege.webp" loading="lazy" width="837" height="100" />
+</picture>
+
+</p>
+
+<h3 id="testen-der-records" data-numberify>Testen der Records<a class="anchor ms-1" href="#testen-der-records"></a></h3>
+
+<h3 id="dns-checker" data-numberify>DNS-Checker<a class="anchor ms-1" href="#dns-checker"></a></h3>
+<p>Die Überprüfung der DNS-Einträge erfolgt auf zwei Wegen. Eine Möglichkeit bietet die externe Website <a href="https://dnschecker.org/#A/nextcloud.erik-skopp.de" target="_blank" rel="noopener noreferrer">DNSChecker<i class="fas fa-external-link-square-alt ms-1"></i></a>. Dort kann die gewünschte URL eingegeben und der zu überprüfende DNS-Record ausgewählt werden. Die Ergebnisse werden übersichtlich dargestellt und zeigen, in welchen Regionen der Eintrag bereits propagiert wurde und wo er noch aussteht.</p>
+<p><picture><img class="img-fluid " alt="DNS Checker" src="/nextcloud-auf-alpine-mit-caddy/dnschecker.webp" loading="lazy" width="1580" height="768" />
+</picture>
+
+</p>
+
+<h4 id="dig" data-numberify>DIG<a class="anchor ms-1" href="#dig"></a></h4>
+<blockquote>
+<p>dig (Domain Information Groper) ist ein leistungsstarkes Kommandozeilen-Tool zum Abfragen von DNS-Informationen. Es wird häufig von Netzwerkadministratoren und Entwicklern [&hellip;] genutzt, um DNS-Records von Domains zu analysieren. (Quelle: verschiedene)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p></blockquote>
+<p>Wir nutzen dig um mit einem CLI Tool zu prüfen ob die DNS Einträge für die Nextcloud Domain vorhanden sind. Auf Gründen der einfachheit werde ich hier nur auf den <code>IPv4</code> bzw <code>A-Record</code> eingehen, da nur dieser hier relevant ist. Für den anderen Record bedarf es keine Änderung. Auf dem Server werden beide in der Caddy Config abgefangen.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln"> 1</span><span class="cl">&gt; dig nextcloud.erik-skopp.de
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="p">;</span> &lt;&lt;&gt;&gt; DiG 9.18.30-0xxx &lt;&lt;&gt;&gt; nextcloud.erik-skopp.de
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl"><span class="p">;;</span> global options: +cmd
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="p">;;</span> Got answer:
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl"><span class="p">;;</span> -&gt;&gt;HEADER<span class="s">&lt;&lt;- opcode: QUERY, status: NOERROR, id: 8998
+</span></span></span><span class="line"><span class="ln"> 7</span><span class="cl"><span class="s">;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1
+</span></span></span><span class="line"><span class="ln"> 8</span><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="ln"> 9</span><span class="cl"><span class="s">;; OPT PSEUDOSECTION:
+</span></span></span><span class="line"><span class="ln">10</span><span class="cl"><span class="s">; EDNS: version: 0, flags:; udp: 512
+</span></span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="s">;; QUESTION SECTION:
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="s">;nextcloud.erik-skop</span>p.de.       IN      A
+</span></span><span class="line"><span class="ln">13</span><span class="cl">
+</span></span><span class="line"><span class="ln">14</span><span class="cl"><span class="p">;;</span> ANSWER SECTION:
+</span></span><span class="line"><span class="ln">15</span><span class="cl">nextcloud.erik-skopp.de. <span class="m">182</span>    IN      A       152.53.120.57
+</span></span><span class="line"><span class="ln">16</span><span class="cl">
+</span></span><span class="line"><span class="ln">17</span><span class="cl"><span class="p">;;</span> Query time: <span class="m">49</span> msec
+</span></span><span class="line"><span class="ln">18</span><span class="cl"><span class="p">;;</span> SERVER: 10.255.255.254#53<span class="o">(</span>10.255.255.254<span class="o">)</span> <span class="o">(</span>UDP<span class="o">)</span>
+</span></span><span class="line"><span class="ln">19</span><span class="cl"><span class="p">;;</span> WHEN: Fri Feb <span class="m">07</span> 10:17:31 CET <span class="m">2025</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl"><span class="p">;;</span> MSG SIZE  rcvd: <span class="m">68</span>
+</span></span></code></pre></div><p>In der Antwortsektion ist zu erkennen, dass der Server den A-Record erfolgreich aufgelöst hat. Daher können wir uns nun der Serverkonfiguration widmen.</p>
+
+<h2 id="einrichten-des-servers" data-numberify>Einrichten des Servers<a class="anchor ms-1" href="#einrichten-des-servers"></a></h2>
+
+<h3 id="grundgedanke" data-numberify>Grundgedanke<a class="anchor ms-1" href="#grundgedanke"></a></h3>
+<p>In den meisten Linux-Distributionen werden Websites standardmäßig im Verzeichnis <code>/var/www</code> abgelegt. Daher erstellen wir dort den Ordner <code>nextcloud</code>, der als Hauptverzeichnis für Nextcloud dient. Die Nutzerdaten hingegen werden in <code>/home/data/</code> gespeichert. Diese Trennung ist essenziell, da sie die Verwaltung von Zugriffsrechten erleichtert und die Struktur übersichtlicher hält.</p>
+<p>Anschließend konfigurieren wir Caddy so, dass es die Index-Dateien aus dem Verzeichnis <code>/var/www/nextcloud</code> lädt. Da Nextcloud PHP erfordert, verwenden wir die aktuelle Version 8.3, die über den <code>PHP FastCGI Socket</code> eingebunden wird. PHP FastCGI (Fast Common Gateway Interface) ist eine optimierte Methode zur Kommunikation zwischen einem Webserver und der PHP-Interpreter-Instanz. Im Gegensatz zum klassischen CGI, bei dem für jede Anfrage ein neuer PHP-Prozess gestartet wird, hält FastCGI persistente Prozesse bereit, die mehrere Anfragen effizient verarbeiten können. Dies reduziert den Overhead und verbessert die Leistung von PHP-Anwendungen erheblich.</p>
+<p>Ein <code>sock</code> (Socket) ist eine Datei, die als Kommunikationsschnittstelle zwischen zwei Prozessen auf demselben System dient. In diesem Fall ermöglicht ein Unix-Domain-Socket die direkte und schnelle Kommunikation zwischen dem Webserver (Caddy) und der PHP-FPM-Instanz. Der Webserver übergibt Anfragen an diesen Socket, woraufhin PHP-FPM die Anfragen verarbeitet und die Antworten zurückliefert.</p>
+<p>Als Datenbank setzen wir MariaDB ein, um die erforderlichen Daten für Nextcloud zu verwalten.</p>
+<p>Mit dieser Konfiguration ist die grundlegende Einrichtung abgeschlossen.</p>
+
+<h3 id="grundlagen-von-alpine" data-numberify>Grundlagen von Alpine<a class="anchor ms-1" href="#grundlagen-von-alpine"></a></h3>
+<p>In diesem Projekt verwenden wir Alpine Linux in der Version <code>3.21.3</code>, die über die offizielle <a href="https://alpinelinux.org/downloads/" target="_blank" rel="noopener noreferrer">Alpine-Downloadseite<i class="fas fa-external-link-square-alt ms-1"></i></a> verfügbar ist. Wir gehen davon aus, dass eine installierte und funktionsfähige Alpine-Version bereits vorhanden ist.</p>
+<p>Um Alpine aktuell zu halten und um es zu aktualisieren empfiehlt es sich ein update durchzuführen.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="ln">1</span><span class="cl">apk update
+</span></span><span class="line"><span class="ln">2</span><span class="cl">apk upgrade
+</span></span></code></pre></div><p>Ähnlich wie bei anderen Distributionen aktualisiert <code>apk update</code> die Paketlisten und <code>apk upgrade</code> die Packages anhand der Packetlisten.</p>
+
+<h3 id="erstellen-der-ordnerstruktur" data-numberify>Erstellen der Ordnerstruktur<a class="anchor ms-1" href="#erstellen-der-ordnerstruktur"></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">mkdir -p /home/data
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="nb">cd</span> /var/www
+</span></span><span class="line"><span class="ln">3</span><span class="cl">mkdir -p nextcloud.erik-skopp.de
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="nb">cd</span> ~
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="nb">cd</span> nextcloud.erik-skopp.de/
+</span></span></code></pre></div><p>Für die Nextcloud-Installation benötigen wir lediglich zwei Verzeichnisse: <sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></p>
+<ol>
+<li><code>/home/data</code> – Dieses Verzeichnis dient als Speicherort für die Nutzerdaten. Durch die Trennung von Anwendungs- und Nutzerdaten wird die Verwaltung von Zugriffsrechten vereinfacht und die Datensicherheit erhöht.</li>
+<li><code>/var/www/nextcloud.erik-skopp.de</code> – Hier wird die Nextcloud-Installation selbst abgelegt. Dieses Verzeichnis enthält alle erforderlichen Dateien für den Betrieb von Nextcloud.</li>
+</ol>
+<p>Diese klare Trennung sorgt für eine bessere Organisation und erleichtert zukünftige Wartungsarbeiten.</p>
+
+<h3 id="herunterladen-von-nextcloud" data-numberify>Herunterladen von Nextcloud<a class="anchor ms-1" href="#herunterladen-von-nextcloud"></a></h3>
+<p>Zunächst laden wir die Datei <code>latest.zip</code> herunter und entpacken sie in das vorgesehene Verzeichnis. Alpine bietet in der Dokumentation ein <code>nextcloud-initscript</code><sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>, das diesen Prozess automatisiert. Im Wesentlichen führt das Skript dieselben Schritte aus, mit dem Unterschied, dass es zusätzlich die erforderlichen PHP-Abhängigkeiten installiert.</p>
+<p>Da wir das System manuell einrichten, müssen wir die benötigten PHP-Pakete selbst installieren, um sicherzustellen, dass Nextcloud reibungslos</p>
+
+<h3 id="installation-von-php-83" data-numberify>Installation von PHP 8.3<a class="anchor ms-1" href="#installation-von-php-83"></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">apk add php83 php83-fpm php83-mysqli php83-json php83-openssl <span class="se">\
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="se"></span>    php83-curl php83-gd php83-intl php83-mbstring php83-xml <span class="se">\
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="se"></span>    php83-zip php83-bcmath php83-gmp php83-exif php83-fileinfo <span class="se">\
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="se"></span>    php83-pcntl php83-posix php83-session php83-simplexml <span class="se">\
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="se"></span>    php83-tokenizer php83-iconv php83-dom php83-xmlreader <span class="se">\
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="se"></span>    php83-xmlwriter php83-pdo php83-pdo_mysql php83-opcache
+</span></span></code></pre></div><p>Um PHP allein nutzen zu können, reicht es aus, den Befehl <code>apk add php83 php83-fpm</code> auszuführen. Nextcloud erfordert jedoch zusätzliche PHP-Erweiterungen für seine Kernfunktionen und Plugins. Um nicht jede Erweiterung einzeln zu installieren, kann man mit diesem Befehl die wichtigsten Extensions direkt hinzufügen.</p>
+
+<h3 id="installation-von-caddy" data-numberify>Installation von Caddy<a class="anchor ms-1" href="#installation-von-caddy"></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">apk add caddy
+</span></span></code></pre></div><p>Caddy ist ein moderner, leistungsstarker Webserver und Reverse Proxy, der sich durch einfache Konfiguration, automatische HTTPS-Unterstützung und geringe Systemanforderungen auszeichnet. Er ist in Go geschrieben und wird oft als Alternative zu Nginx oder Apache verwendet.</p>
+<p>Wie alle Webserver basiert Caddy auf Konfigurationsdateien, die nun bearbeitet werden müssen. Ein wesentlicher Unterschied zu Apache und Nginx besteht darin, dass Caddy die Verwaltung von SSL/TLS-Zertifikaten automatisch übernimmt. <sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+
+<h2 id="sonstiges" data-numberify>Sonstiges<a class="anchor ms-1" href="#sonstiges"></a></h2>
+
+<h3 id="titelbild" data-numberify>Titelbild<a class="anchor ms-1" href="#titelbild"></a></h3>
+<p>Das Titelbild stammt von Pixabay.<sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup></p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p><a href="https://de.wikipedia.org/wiki/Dig_%28Software%29" target="_blank" rel="noopener noreferrer">Wikipedia Dig Software<i class="fas fa-external-link-square-alt ms-1"></i></a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2">
+<p>Diese Trennung habe ich mir vor etlichen Jahren abgeschaut und finde sie bis heute sinnvoll. Sie sorgt für eine klare Struktur, erleichtert die Verwaltung von Zugriffsrechten und verbessert die Wartbarkeit des Systems. Während sich <code>/home/data</code> ausschließlich um die Speicherung der Nutzerdaten kümmert, bleibt <code>/var/www/nextcloud.erik-skopp.de</code> auf die Anwendung selbst beschränkt. Dadurch lassen sich Backups gezielter anfertigen und Berechtigungen besser steuern.
+<a href="https://apfelcast.com/nextcloud-28-hub-7-installation-einfache-anleitung-auf-linux-server-inkl-domain-ssl/" target="_blank" rel="noopener noreferrer">Apfelcast - Nextcloud und Nginx<i class="fas fa-external-link-square-alt ms-1"></i></a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3">
+<p><a href="https://wiki.alpinelinux.org/wiki/Nextcloud#Webserver" target="_blank" rel="noopener noreferrer">Nextcloud im Alpine Wiki<i class="fas fa-external-link-square-alt ms-1"></i></a>&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4">
+<p><a href="https://wiki.alpinelinux.org/wiki/Caddy" target="_blank" rel="noopener noreferrer">Caddy im Alpine Wiki<i class="fas fa-external-link-square-alt ms-1"></i></a>&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:5">
+<p><a href="https://pixabay.com/de/illustrations/ai-generiert-cloud-computing-bergbau-8533603/" target="_blank" rel="noopener noreferrer">Quelle: AI-generiert Cloud Computing Mining auf Pixabay<i class="fas fa-external-link-square-alt ms-1"></i></a>&#160;<a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+]]></content:encoded><enclosure url="https://backup.erik-skopp.de/nextcloud-auf-alpine-mit-caddy/featured-sample.webp" length="176444" type="image/webp"/></item></channel></rss>
