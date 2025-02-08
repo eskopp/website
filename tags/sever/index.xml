@@ -253,6 +253,25 @@ Die Umstellung auf eine <strong>Unix-Socket-Datei</strong> (<code>/run/php-fpm83
 </ol>
 <p>Durch diese Änderungen wird <code>PHP-FPM</code> effizienter, sicherer und performanter in die <code>Webserver-Umgebung</code> integriert.</p>
 
+<h3 id="maria-db-für-nextcloud" data-numberify>Maria DB für Nextcloud<a class="anchor ms-1" href="#maria-db-für-nextcloud"></a></h3>
+<p>Dieser Block kann schnell abgehandelt werden, da es sehr einfach ist.
+Zuerst installieren wir mit apk die Packages:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">apk add nextcloud-mysql mariadb mariadb-client
+</span></span></code></pre></div><p>Anschließend führen wir einen Neustart des MariaDB-Stacks durch:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="ln">1</span><span class="cl">mysql_install_db --user<span class="o">=</span>mysql --datadir<span class="o">=</span>/var/lib/mysql
+</span></span><span class="line"><span class="ln">2</span><span class="cl">service mariadb start
+</span></span><span class="line"><span class="ln">3</span><span class="cl">rc-update add mariadb
+</span></span><span class="line"><span class="ln">4</span><span class="cl">mysql_secure_installation
+</span></span></code></pre></div><p>Da MySQL/MariaDB nun konfiguriert ist, können wir den Dienst starten und die Datenbanken anlegen.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">mysql</span><span class="w"> </span><span class="o">-</span><span class="n">u</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="n">nextcloud</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">nextcloud</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;mycloud&#39;</span><span class="o">@</span><span class="s1">&#39;localhost&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;sicherespasswort&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="k">GRANT</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">nextcloud</span><span class="p">.</span><span class="o">*</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="s1">&#39;mycloud&#39;</span><span class="o">@</span><span class="s1">&#39;localhost.localdomain&#39;</span><span class="w"> </span><span class="n">IDENTIFIED</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="s1">&#39;sicherespasswort&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="n">FLUSH</span><span class="w"> </span><span class="k">PRIVILEGES</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="n">EXIT</span><span class="w">
+</span></span></span></code></pre></div><blockquote>
+<p>Bitte ändern Sie das Passowrt</p></blockquote>
+
 <h2 id="sonstiges" data-numberify>Sonstiges<a class="anchor ms-1" href="#sonstiges"></a></h2>
 
 <h3 id="titelbild" data-numberify>Titelbild<a class="anchor ms-1" href="#titelbild"></a></h3>
