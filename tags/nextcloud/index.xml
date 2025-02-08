@@ -316,8 +316,63 @@ Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adress
 </span></span></code></pre></td></tr></table>
 </div>
 </div><p>Anschließend sind einige Anpassungen in der Datei <code>/etc/php83/php-fpm.d/www.conf</code> erforderlich. Ich empfehle, die Datei vollständig zu löschen, da nur wenige Konfigurationen benötigt werden. Diese werde ich nun im Detail erläutern.</p>
-<p>nano</p>
-
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="o">[</span>www<span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span><span class="nv">listen</span> <span class="o">=</span> 127.0.0.1:9000
+</span></span><span class="line"><span class="cl"><span class="p">;</span><span class="nv">user</span> <span class="o">=</span> nobody
+</span></span><span class="line"><span class="cl"><span class="p">;</span><span class="c1">#group = nobody</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span><span class="c1">#listen.owner = nobody</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span>listen.group <span class="o">=</span> nobody
+</span></span><span class="line"><span class="cl"><span class="p">;</span>listen.mode <span class="o">=</span> <span class="m">0666</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span><span class="nv">pm</span> <span class="o">=</span> dynamic
+</span></span><span class="line"><span class="cl"><span class="p">;</span>pm.max_children <span class="o">=</span> <span class="m">50</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span>pm.start_servers <span class="o">=</span> <span class="m">5</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span>pm.min_spare_servers <span class="o">=</span> <span class="m">5</span>
+</span></span><span class="line"><span class="cl"><span class="p">;</span>pm.max_spare_servers <span class="o">=</span> <span class="m">35</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">user</span> <span class="o">=</span> caddy
+</span></span><span class="line"><span class="cl"><span class="nv">group</span> <span class="o">=</span> caddy
+</span></span><span class="line"><span class="cl"><span class="nv">listen</span> <span class="o">=</span> /run/php-fpm83/php-fpm.sock
+</span></span><span class="line"><span class="cl">listen.owner <span class="o">=</span> caddy
+</span></span><span class="line"><span class="cl">listen.group <span class="o">=</span> caddy
+</span></span><span class="line"><span class="cl">listen.mode <span class="o">=</span> <span class="m">0660</span>
+</span></span><span class="line"><span class="cl"><span class="nv">pm</span> <span class="o">=</span> dynamic
+</span></span><span class="line"><span class="cl">pm.max_children <span class="o">=</span> <span class="m">10</span>
+</span></span><span class="line"><span class="cl">pm.start_servers <span class="o">=</span> <span class="m">2</span>
+</span></span><span class="line"><span class="cl">pm.min_spare_servers <span class="o">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl">pm.max_spare_servers <span class="o">=</span> <span class="m">5</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 <h2 id="sonstiges" data-numberify>Sonstiges<a class="anchor ms-1" href="#sonstiges"></a></h2>
 
 <h3 id="titelbild" data-numberify>Titelbild<a class="anchor ms-1" href="#titelbild"></a></h3>
