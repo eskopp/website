@@ -336,6 +336,33 @@ Die Umstellung auf eine **Unix-Socket-Datei** (`/run/php-fpm83/php-fpm.sock`) wu
 
 Durch diese Änderungen wird `PHP-FPM` effizienter, sicherer und performanter in die `Webserver-Umgebung` integriert.
 
+### Maria DB für Nextcloud 
+Dieser Block kann schnell abgehandelt werden, da es sehr einfach ist. 
+Zuerst installieren wir mit apk die Packages:
+
+```bash
+apk add nextcloud-mysql mariadb mariadb-client
+```
+Anschließend führen wir einen Neustart des MariaDB-Stacks durch:
+
+```bash
+mysql_install_db --user=mysql --datadir=/var/lib/mysql
+service mariadb start
+rc-update add mariadb
+mysql_secure_installation
+```
+Da MySQL/MariaDB nun konfiguriert ist, können wir den Dienst starten und die Datenbanken anlegen.
+
+```sql
+mysql -u root -p
+CREATE DATABASE nextcloud;
+GRANT ALL ON nextcloud.* TO 'mycloud'@'localhost' IDENTIFIED BY 'sicherespasswort';
+GRANT ALL ON nextcloud.* TO 'mycloud'@'localhost.localdomain' IDENTIFIED BY 'sicherespasswort';
+FLUSH PRIVILEGES;
+EXIT
+```
+> Bitte ändern Sie das Passowrt
+
 ## Sonstiges
 
 ### Titelbild
