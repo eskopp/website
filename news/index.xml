@@ -373,7 +373,68 @@ Aus dem <code>/64</code>-Adresspool habe ich die <code>:1</code> als Host-Adress
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>Ich habe</p></blockquote>
+<p>Ich habe die alte config oben als Kommentar in der Datei beibehalten. Das macht das Fehler debugging einfacher.
+Die Konfiguration für <code>PHP-FPM 8.3</code> setzt verschiedene Parameter für den Betrieb des PHP-Prozesses unter dem Benutzer <code>caddy</code>. Die einzelnen Zeilen haben folgende Bedeutung:</p></blockquote>
+<ul>
+<li>
+<p><code>user = caddy</code> und <code>group = caddy</code><br>
+Diese Zeilen legen fest, dass <code>PHP-FPM</code> als der Benutzer <code>caddy</code> in der Gruppe <code>caddy</code> ausgeführt wird. Dies ist wichtig, um eine saubere Rechteverwaltung zu gewährleisten und sicherzustellen, dass <code>PHP</code>-Prozesse unter dem Webserver-Benutzer laufen.</p>
+</li>
+<li>
+<p><code>listen = /run/php-fpm83/php-fpm.sock</code><br>
+Diese Einstellung definiert, dass <code>PHP-FPM</code> über eine <strong>Unix-Socket-Datei</strong> (<code>/run/php-fpm83/php-fpm.sock</code>) statt über eine <strong>TCP-Adresse</strong> (<code>127.0.0.1:9000</code>) kommuniziert.<br>
+Die Nutzung einer <strong>Unix-Socket-Verbindung</strong> hat mehrere Vorteile:</p>
+<ul>
+<li>Sie ist schneller als eine <code>TCP</code>-Verbindung, da sie ohne Netzwerk-Overhead direkt auf dem Dateisystem operiert.</li>
+<li>Sie ist sicherer, da keine Netzwerkverbindung geöffnet wird, wodurch Angriffe von außen ausgeschlossen sind.</li>
+<li>Sie reduziert die Ressourcennutzung, insbesondere bei lokalen Webservern wie <code>Caddy</code> oder <code>Nginx</code>.</li>
+</ul>
+</li>
+<li>
+<p><code>listen.owner = caddy</code> und <code>listen.group = caddy</code><br>
+Diese Einstellungen definieren, dass der <code>Caddy</code>-Server vollen Zugriff auf die <code>PHP-Socket</code>-Datei hat. Ohne diese Konfiguration könnte der Webserver <code>PHP-FPM</code> möglicherweise nicht korrekt ansprechen.</p>
+</li>
+<li>
+<p><code>listen.mode = 0660</code><br>
+Hier wird festgelegt, dass die erstellte <code>Socket-Datei</code> (<code>php-fpm.sock</code>) mit den <strong>Berechtigungen 0660</strong> versehen wird.<br>
+Das bedeutet:</p>
+<ul>
+<li><strong>Eigentümer (<code>caddy</code>)</strong>: Lesen &amp; Schreiben (<code>6</code>)</li>
+<li><strong>Gruppe (<code>caddy</code>)</strong>: Lesen &amp; Schreiben (<code>6</code>)</li>
+<li><strong>Andere Benutzer</strong>: Kein Zugriff (<code>0</code>)<br>
+Dadurch wird sichergestellt, dass nur der <code>Webserver-Prozess</code> auf den <code>Socket</code> zugreifen kann.</li>
+</ul>
+</li>
+<li>
+<p><code>pm = dynamic</code><br>
+Diese Einstellung konfiguriert das <strong>Prozessmanagement</strong> für <code>PHP-FPM</code> auf <code>dynamisch</code>. Das bedeutet, dass <code>PHP-FPM</code> je nach Last die Anzahl der Prozesse anpasst.</p>
+</li>
+<li>
+<p><code>pm.max_children = 10</code><br>
+Dies gibt die maximale Anzahl an <code>PHP-Prozessen</code> an, die <code>PHP-FPM</code> gleichzeitig starten kann. Damit wird verhindert, dass das System überlastet wird.</p>
+</li>
+<li>
+<p><code>pm.start_servers = 2</code><br>
+Diese Zeile gibt an, dass <code>PHP-FPM</code> direkt beim Start <strong>zwei Prozesse</strong> erzeugt.</p>
+</li>
+<li>
+<p><code>pm.min_spare_servers = 1</code><br>
+Dies stellt sicher, dass mindestens <strong>ein Prozess</strong> im Leerlauf bleibt, um Anfragen sofort bearbeiten zu können.</p>
+</li>
+<li>
+<p><code>pm.max_spare_servers = 5</code><br>
+Diese Einstellung gibt an, dass maximal <strong>fünf Prozesse</strong> im Leerlauf sein dürfen, um Ressourcen zu sparen.</p>
+</li>
+</ul>
+<p>Standardmäßig lauscht <code>PHP-FPM</code> auf <code>127.0.0.1:9000</code>, einer <code>TCP</code>-Verbindung.<br>
+Die Umstellung auf eine <strong>Unix-Socket-Datei</strong> (<code>/run/php-fpm83/php-fpm.sock</code>) wurde vorgenommen, weil:</p>
+<ol>
+<li><strong>Leistungssteigerung</strong>: Eine <code>Unix-Socket</code> ist schneller als <code>TCP</code>, da kein Netzwerk-Stack verwendet wird.</li>
+<li><strong>Sicherheit</strong>: Eine <code>TCP-Verbindung</code> könnte theoretisch von anderen Diensten oder Benutzern im Netzwerk abgefangen werden.</li>
+<li><strong>Ressourcenschonung</strong>: Ein <code>Unix-Socket</code> verbraucht weniger Systemressourcen als eine <code>TCP-Verbindung</code>.</li>
+<li><strong>Bessere Integration mit Caddy</strong>: Da <code>Caddy</code> lokal läuft, kann es direkt auf den <code>Unix-Socket</code> zugreifen, ohne dass ein Netzwerkport geöffnet sein muss.</li>
+</ol>
+<p>Durch diese Änderungen wird <code>PHP-FPM</code> effizienter, sicherer und performanter in die <code>Webserver-Umgebung</code> integriert.</p>
 
 <h2 id="sonstiges" data-numberify>Sonstiges<a class="anchor ms-1" href="#sonstiges"></a></h2>
 
