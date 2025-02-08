@@ -275,7 +275,7 @@ Zuerst installieren wir mit apk die Packages:</p>
 <h2 id="nextcloud-im-browser" data-numberify>Nextcloud im Browser<a class="anchor ms-1" href="#nextcloud-im-browser"></a></h2>
 
 <h3 id="cant-write-into-config-directory" data-numberify>Can’t write into config directory!<a class="anchor ms-1" href="#cant-write-into-config-directory"></a></h3>
-<p><picture><img class="img-fluid " alt="Cant write" src="" loading="lazy" />
+<p><picture><img class="img-fluid " alt="Cant write" src="/nextcloud-auf-alpine-mit-caddy/cant_write.png" loading="lazy" width="743" height="308" />
 </picture>
 
 </p>
