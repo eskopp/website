@@ -48,4 +48,4 @@ markup:
     guessSyntax: true
     lineNos: true
     noClasses: false
-    lineNumbersInTable: false
+    lineNumbersInTable: true
