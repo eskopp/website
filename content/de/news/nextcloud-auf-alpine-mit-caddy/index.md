@@ -145,6 +145,15 @@ apk add php83 php83-fpm php83-mysqli php83-json php83-openssl \
     php83-tokenizer php83-iconv php83-dom php83-xmlreader \
     php83-xmlwriter php83-pdo php83-pdo_mysql php83-opcache
 ```
+Um PHP allein nutzen zu können, reicht es aus, den Befehl `apk add php83 php83-fpm` auszuführen. Nextcloud erfordert jedoch zusätzliche PHP-Erweiterungen für seine Kernfunktionen und Plugins. Um nicht jede Erweiterung einzeln zu installieren, kann man mit diesem Befehl die wichtigsten Extensions direkt hinzufügen.
+
+### Installation von Caddy 
+```bash
+apk add caddy
+```
+Caddy ist ein moderner, leistungsstarker Webserver und Reverse Proxy, der sich durch einfache Konfiguration, automatische HTTPS-Unterstützung und geringe Systemanforderungen auszeichnet. Er ist in Go geschrieben und wird oft als Alternative zu Nginx oder Apache verwendet.
+
+Wie alle Webserver basiert Caddy auf Konfigurationsdateien, die nun bearbeitet werden müssen. Ein wesentlicher Unterschied zu Apache und Nginx besteht darin, dass Caddy die Verwaltung von SSL/TLS-Zertifikaten automatisch übernimmt.
 
 ## Sonstiges
 ### Titelbild
