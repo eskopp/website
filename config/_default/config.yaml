@@ -47,5 +47,5 @@ markup:
   highlight:
     guessSyntax: true
     lineNos: true
-    noClasses: true
+    noClasses: false
     lineNumbersInTable: false
