@@ -229,14 +229,17 @@ Zusätzlich werden mehrere `Sicherheits-Header` gesetzt, um die Nextcloud-Instan
 Diese `Caddyfile` ermöglicht eine sichere und optimierte Bereitstellung von Nextcloud auf der Domain `nextcloud.erik-skopp.de`. Caddy übernimmt die Verwaltung von `statischen Dateien`, `PHP-Verarbeitung` und `Sicherheitsmechanismen`, wodurch eine stabile und geschützte Umgebung für Nextcloud gewährleistet wird.
 
 Wenn die Config fertig ist, kann man sie formatieren. Dies sollte man tun, da sonst OpenRC sich beschwert.
+
 ```bash
 caddy fmt --overwrite /etc/caddy/Caddyfile
 ```
 
-Anschließend muss Caddy neu gestartet werden. Dies ist wichtig, damit er die Config neu einliest. 
+Anschließend muss Caddy neu gestartet werden. Dies ist wichtig, damit er die Config neu einliest.
+
 ```bash
 rc-service caddy restart
 ```
+
 ### Aktivieren von PHP8.3
 
 Das starten von PHP8.3 hat sich immer als etwas schwierig herausgestellt.
@@ -246,13 +249,13 @@ rc-update add php-fpm83 default
 rc-service php-fpm83 restart
 ```
 
-Jetzt geht es um die PHP config 
+Jetzt geht es um die PHP config
 
 ```bash
 nano /etc/php83/php-fpm.d/www.conf
 ```
-Anschließend sind einige Anpassungen in der Datei `/etc/php83/php-fpm.d/www.conf` erforderlich. Ich empfehle, die Datei vollständig zu löschen, da nur wenige Konfigurationen benötigt werden. Diese werde ich nun im Detail erläutern.
 
+Anschließend sind einige Anpassungen in der Datei `/etc/php83/php-fpm.d/www.conf` erforderlich. Ich empfehle, die Datei vollständig zu löschen, da nur wenige Konfigurationen benötigt werden. Diese werde ich nun im Detail erläutern.
 
 ```bash
 [www]
@@ -282,7 +285,57 @@ pm.min_spare_servers = 1
 pm.max_spare_servers = 5
 ```
 
-> Ich habe 
+> Ich habe die alte config oben als Kommentar in der Datei beibehalten. Das macht das Fehler debugging einfacher.
+Die Konfiguration für `PHP-FPM 8.3` setzt verschiedene Parameter für den Betrieb des PHP-Prozesses unter dem Benutzer `caddy`. Die einzelnen Zeilen haben folgende Bedeutung:
+
+- `user = caddy` und `group = caddy`  
+  Diese Zeilen legen fest, dass `PHP-FPM` als der Benutzer `caddy` in der Gruppe `caddy` ausgeführt wird. Dies ist wichtig, um eine saubere Rechteverwaltung zu gewährleisten und sicherzustellen, dass `PHP`-Prozesse unter dem Webserver-Benutzer laufen.
+
+- `listen = /run/php-fpm83/php-fpm.sock`  
+  Diese Einstellung definiert, dass `PHP-FPM` über eine **Unix-Socket-Datei** (`/run/php-fpm83/php-fpm.sock`) statt über eine **TCP-Adresse** (`127.0.0.1:9000`) kommuniziert.  
+  Die Nutzung einer **Unix-Socket-Verbindung** hat mehrere Vorteile:
+
+  - Sie ist schneller als eine `TCP`-Verbindung, da sie ohne Netzwerk-Overhead direkt auf dem Dateisystem operiert.
+  - Sie ist sicherer, da keine Netzwerkverbindung geöffnet wird, wodurch Angriffe von außen ausgeschlossen sind.
+  - Sie reduziert die Ressourcennutzung, insbesondere bei lokalen Webservern wie `Caddy` oder `Nginx`.
+
+- `listen.owner = caddy` und `listen.group = caddy`  
+  Diese Einstellungen definieren, dass der `Caddy`-Server vollen Zugriff auf die `PHP-Socket`-Datei hat. Ohne diese Konfiguration könnte der Webserver `PHP-FPM` möglicherweise nicht korrekt ansprechen.
+
+- `listen.mode = 0660`  
+  Hier wird festgelegt, dass die erstellte `Socket-Datei` (`php-fpm.sock`) mit den **Berechtigungen 0660** versehen wird.  
+  Das bedeutet:
+
+  - **Eigentümer (`caddy`)**: Lesen & Schreiben (`6`)
+  - **Gruppe (`caddy`)**: Lesen & Schreiben (`6`)
+  - **Andere Benutzer**: Kein Zugriff (`0`)  
+    Dadurch wird sichergestellt, dass nur der `Webserver-Prozess` auf den `Socket` zugreifen kann.
+
+- `pm = dynamic`  
+  Diese Einstellung konfiguriert das **Prozessmanagement** für `PHP-FPM` auf `dynamisch`. Das bedeutet, dass `PHP-FPM` je nach Last die Anzahl der Prozesse anpasst.
+
+- `pm.max_children = 10`  
+  Dies gibt die maximale Anzahl an `PHP-Prozessen` an, die `PHP-FPM` gleichzeitig starten kann. Damit wird verhindert, dass das System überlastet wird.
+
+- `pm.start_servers = 2`  
+  Diese Zeile gibt an, dass `PHP-FPM` direkt beim Start **zwei Prozesse** erzeugt.
+
+- `pm.min_spare_servers = 1`  
+  Dies stellt sicher, dass mindestens **ein Prozess** im Leerlauf bleibt, um Anfragen sofort bearbeiten zu können.
+
+- `pm.max_spare_servers = 5`  
+  Diese Einstellung gibt an, dass maximal **fünf Prozesse** im Leerlauf sein dürfen, um Ressourcen zu sparen.
+
+Standardmäßig lauscht `PHP-FPM` auf `127.0.0.1:9000`, einer `TCP`-Verbindung.  
+Die Umstellung auf eine **Unix-Socket-Datei** (`/run/php-fpm83/php-fpm.sock`) wurde vorgenommen, weil:
+
+1. **Leistungssteigerung**: Eine `Unix-Socket` ist schneller als `TCP`, da kein Netzwerk-Stack verwendet wird.
+2. **Sicherheit**: Eine `TCP-Verbindung` könnte theoretisch von anderen Diensten oder Benutzern im Netzwerk abgefangen werden.
+3. **Ressourcenschonung**: Ein `Unix-Socket` verbraucht weniger Systemressourcen als eine `TCP-Verbindung`.
+4. **Bessere Integration mit Caddy**: Da `Caddy` lokal läuft, kann es direkt auf den `Unix-Socket` zugreifen, ohne dass ein Netzwerkport geöffnet sein muss.
+
+Durch diese Änderungen wird `PHP-FPM` effizienter, sicherer und performanter in die `Webserver-Umgebung` integriert.
+
 ## Sonstiges
 
 ### Titelbild
