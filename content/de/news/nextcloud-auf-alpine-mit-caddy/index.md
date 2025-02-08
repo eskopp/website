@@ -235,7 +235,7 @@ caddy fmt --overwrite /etc/caddy/Caddyfile
 
 Anschließend muss Caddy neu gestartet werden. Dies ist wichtig, damit er die Config neu einliest. 
 ```bash
-c-service caddy restart
+rc-service caddy restart
 ```
 ### Aktivieren von PHP8.3
 
@@ -245,6 +245,16 @@ Das starten von PHP8.3 hat sich immer als etwas schwierig herausgestellt.
 rc-update add php-fpm83 default
 rc-service php-fpm83 restart
 ```
+
+Jetzt geht es um die PHP config 
+
+```bash
+nano /etc/php83/php-fpm.d/www.conf
+```
+Anschließend sind einige Anpassungen in der Datei `/etc/php83/php-fpm.d/www.conf` erforderlich. Ich empfehle, die Datei vollständig zu löschen, da nur wenige Konfigurationen benötigt werden. Diese werde ich nun im Detail erläutern.
+
+
+nano 
 
 ## Sonstiges
 
