@@ -1,8 +1,8 @@
 (() => {
-  // ns-hugo-params:/home/runner/.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/razonyang/hugo-theme-bootstrap@v1.9.4/assets/js/local-storage/index.ts
+  // ns-hugo-params:/home/runner/.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/razonyang/hugo-theme-bootstrap@v1.10.0/assets/js/local-storage/index.ts
   var local_storage_default = { baseURL: "https://backup.erik-skopp.de/" };
 
-  // ns-hugo-imp:/home/runner/.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/razonyang/hugo-theme-bootstrap@v1.9.4/assets/js/local-storage/index.ts
+  // ns-hugo-imp:/home/runner/.cache/hugo_cache/modules/filecache/modules/pkg/mod/github.com/razonyang/hugo-theme-bootstrap@v1.10.0/assets/js/local-storage/index.ts
   var PathLocalStorage = class {
     constructor(baseURL) {
       this.baseURL = baseURL;
