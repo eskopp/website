@@ -60,7 +60,7 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
 
       - name: Create folder structure
-        uses: appleboy/ssh-action@v1.2.1
+        uses: appleboy/ssh-action@v1.2.2
         with:
           host: ${{ secrets.SSH_SERVER }}
           username: ${{ secrets.SSH_USERNAME }}
