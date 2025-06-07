@@ -1,0 +1,33 @@
+name: Deploy Hugo Site
+
+on:
+  push:
+    branches: [ main ]
+
+env:
+  SSHSERVER: ${{ secrets.SSHSERVER }}
+  SSHPW: ${{ secrets.SSHPW }}
+
+jobs:
+  deploy:
+    name: Deploy to Remote Server
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: Hugo Build
+        run: |
+          hugo mod tidy
+          hugo --gc --minify --enableGitInfo
+
+      - name: Deploy with rsync
+        run: |
+          sshpass -p "$SSHPW" rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" public/ webuser@$SSHSERVER:/var/www/eskopp
