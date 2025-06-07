@@ -16,11 +16,6 @@
   weight = 10
 
 [[main]]
-  name = "Shortcodes"
-  pageRef = "docs/shortcodes"
-  weight = 15
-
-[[main]]
   name = "Examples"
   weight = 20
 
