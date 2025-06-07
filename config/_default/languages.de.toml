@@ -8,14 +8,4 @@ title = "Erik Skopp"
   isoCode = "de"
   rtl = false
   dateFormat = "2. Januar 2006"
-  logo = "img/eskopp.jpg"
   description = "Ein leistungsstarkes, leichtgewichtiges Theme für Hugo."
-
-[params.author]
-  name = "Erik Skopp"
-  image = "img/eskopp.jpg"
-  headline = "Ein leistungsstarkes, leichtgewichtiges Theme für Hugo."
-  bio = "Ein leistungsstarkes, leichtgewichtiges Theme für Hugo."
-  links = [
-    { github = "https://github.com/eskopp/website" },
-  ]
