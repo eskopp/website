@@ -1,0 +1,29 @@
+# Hugo build output
+/public/
+/resources/_gen/
+
+# Hugo cache
+/.hugo_build.lock
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDEs & Editor configs
+.vscode/
+.idea/
+
+# Node (falls versehentlich genutzt)
+node_modules/
+
+# Logs
+*.log
+
+# Backup files
+*~
+*.bak
+*.swp
+*.tmp
+
+# Netlify / CI Output (optional)
+/netlify.toml

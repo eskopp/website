@@ -1,0 +1,25 @@
+# Force LF for all text-based files
+* text=auto eol=lf
+
+# Mark known binary file types
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.mp4 binary
+*.mp3 binary
+*.mov binary
+*.avi binary
+*.mkv binary
+
+# Optional: don't normalize SVGs (some tools rely on exact formatting)
+*.svg text eol=lf

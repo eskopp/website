@@ -1,0 +1,19 @@
+baseURL = "http://localhost:1313/"
+languageCode = "en-us"
+title = "My New Hugo Site"
+
+# Optional: Weitere Anpassungen für Blowfish
+[module]
+[[module.imports]]
+path = "github.com/nunocoracao/blowfish/v2"
+
+[params]
+# Konfiguration für Blowfish
+enableDarkMode = true
+enableSearch = true
+# Weitere Anpassungen wie Farbschema oder Layout
+
+[permalinks]
+post = "/:slug/"
+docs = "/:slug/"
+page = "/:slug/"
