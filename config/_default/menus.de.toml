@@ -11,8 +11,8 @@
 # Das Menü wird dann nach Gewicht (aufsteigend) sortiert.
 
 [[main]]
-  name = "Dokumentation"
-  pageRef = "docs"
+  name = "Beiträge"
+  pageRef = "blog"
   weight = 10
 
 [[main]]
