@@ -1,0 +1,23 @@
+languageCode = "de"
+languageName = "Deutsch"
+weight = 1
+title = "Erik Skopp"
+
+[params]
+  displayName = "Deutsch"
+  isoCode = "de"
+  rtl = false
+  dateFormat = "2. Januar 2006"
+  logo = "img/eskopp.jpg"
+  description = "Ein leistungsstarkes, leichtgewichtiges Theme für Hugo."
+
+[params.author]
+  name = "Erik Skopp"
+  email = "nuno@n9o.xyz"
+  image = "img/blowfish_logo.png"
+  headline = "Ein leistungsstarkes, leichtgewichtiges Theme für Hugo."
+  bio = "Ein leistungsstarkes, leichtgewichtiges Theme für Hugo."
+  links = [
+    { x-twitter = "https://twitter.com/burufugu" },
+    { github = "https://github.com/nunocoracao/blowfish" },
+  ]
