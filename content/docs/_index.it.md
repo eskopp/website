@@ -12,4 +12,4 @@ cascade:
 Semplice ma potente. Scopri come utilizzare Blowfish e le sue funzionalità.
 {{< /lead >}}
 
-Questa sezione contiene tutto ciò che devi sapere su Blowfish. Se sei nuovo, consulta la guida [Installazione]({{< ref "docs/installation" >}}) per iniziare o visita la sezione [Esempi]({{< ref "samples" >}}) per vedere cosa può fare Blowfish.
+Questa sezione contiene tutto ciò che devi sapere su Blowfish. Se sei nuovo, consulta la guida [per iniziare o visita la sezione   vedere cosa può fare Blowfish.
