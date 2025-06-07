@@ -4,7 +4,7 @@ weight = 1
 title = "Erik Skopp"
 
 [params]
-  displayName = "English"
+  displayName = "Deutsch"
   isoCode = "en"
   rtl = false
   dateFormat = "2 January 2006"
