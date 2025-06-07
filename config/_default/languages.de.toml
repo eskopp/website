@@ -15,7 +15,6 @@ title = "Erik Skopp"
   name = "Erik Skopp"
   image = "img/eskopp.jpg"
   headline = "Mein Blog."
-  bio = "def  "
   links = [
         { github = "https://github.com/eskopp/website" }
   ]
