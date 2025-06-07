@@ -14,7 +14,7 @@ title = "Erik Skopp"
   [params.author]
   name = "Erik Skopp"
   image = "img/eskopp.jpg"
-  headline = "asdasdasdas."
+  headline = "Mein Blog."
   bio = "def  "
   links = [
         { github = "https://github.com/eskopp/website" }
