@@ -1,0 +1,22 @@
+name: Sync GitHub to GitLab
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  mirror-to-gitlab:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to GitLab
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git remote add gitlab "https://oauth2:${{ secrets.GITLAB_PAT }}@gitlab.erik-skopp.de/erikskopp/website.git"
+          git push --force gitlab main

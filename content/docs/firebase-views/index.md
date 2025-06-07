@@ -7,6 +7,7 @@ slug: "firebase-views"
 tags: ["firebase", "views", likes]
 series: ["Documentation"]
 series_order: 15
+author: ["eskopp"]
 ---
 
 In order to be able to support dynamic data across your website we've added the support to integrate Firebase. This will allow you to use the views feature across lists and posts. 
