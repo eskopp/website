@@ -1,9 +1,9 @@
 ---
-title: "Nextcloud mit Alpine und Caddy"
+title: "Nextcloud with Alpine and Caddy"
 weight: 1
 draft: false
-description: "Nextcloud mit Alpine und Caddy"
-slug: "nextcloud_mit_alpine_und_caddy"
+description: "Nextcloud with Alpine and Caddy"
+slug: "nextcloud_with_alpine_and_caddy"
 tags: ["Nextcloud", "Server", "Alpine", "Caddy"]
 series: ["Nextcloud Server"]
 series_order: 1
