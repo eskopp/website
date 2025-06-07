@@ -1,6 +1,6 @@
 ---
-title: "Documenti"
-description: "Scopri come utilizzare Blowfish e le sue funzionalità."
+title: "Documents"
+description: "Learn how to use Blowfish and its features."
 
 cascade:
   showDate: false
@@ -8,8 +8,9 @@ cascade:
   invertPagination: true
 
 ---
+
 {{< lead >}}
-Semplice ma potente. Scopri come utilizzare Blowfish e le sue funzionalità.
+Simple yet powerful. Learn how to use Blowfish and its features.
 {{< /lead >}}
 
-Questa sezione contiene tutto ciò che devi sapere su Blowfish. Se sei nuovo, consulta la guida [per iniziare o visita la sezione   vedere cosa può fare Blowfish.
+This section contains everything you need to know about Blowfish. If you're new, check out the getting started guide or explore the samples section to see what Blowfish can do.
