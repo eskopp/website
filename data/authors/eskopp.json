@@ -1,0 +1,8 @@
+{
+    "name": "Erik Skopp",
+    "image" : "img/eskopp.jpg",
+    "bio": "Author",
+    "social": [
+        { "github": "https://github.com/nunocoracao" }
+    ]
+}
