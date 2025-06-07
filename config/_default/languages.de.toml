@@ -9,3 +9,12 @@ title = "Erik Skopp"
   rtl = false
   dateFormat = "2. Januar 2006"
   description = "Ein leistungsstarkes, leichtgewichtiges Theme für Hugo."
+
+  [params.author]
+  name = "Erik Skopp"
+  image = "img/eskopp.jpg"
+  headline = "asdasdasdas."
+  bio = "def  "
+  links = [
+        { github = "https://github.com/eskopp/website" }
+  ]
