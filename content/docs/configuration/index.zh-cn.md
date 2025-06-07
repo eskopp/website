@@ -315,13 +315,13 @@ Blowfish 提供了大量控制主题功能的配置参数，下面的表格中�
 
 | 名称                         | 默认值 | 描述                                                                                                                                          |
 | ---------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| `firebase.apiKey`            | 无     | Firebase apiKey， 与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 [这个页面]({{< ref "firebase-views" >}})。           |
-| `firebase.authDomain`        | 无     | Firebase authDomain，与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 [这个页面]({{< ref "firebase-views" >}})。        |
-| `firebase.projectId`         | 无     | Firebase projectId，与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 [这个页面]({{< ref "firebase-views" >}})。         |
-| `firebase.storageBucket`     | 无     | Firebase storageBucket，与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 [这个页面]({{< ref "firebase-views" >}})。     |
-| `firebase.messagingSenderId` | 无     | Firebase messagingSenderId，与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 [这个页面]({{< ref "firebase-views" >}})。 |
-| `firebase.appId`             | 无     | Firebase appId，与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 [这个页面]({{< ref "firebase-views" >}})。             |
-| `firebase.measurementId`     | 无     | Firebase measurementId，与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 [这个页面]({{< ref "firebase-views" >}})。     |
+| `firebase.apiKey`            | 无     | Firebase apiKey， 与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 。           |
+| `firebase.authDomain`        | 无     | Firebase authDomain，与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 。        |
+| `firebase.projectId`         | 无     | Firebase projectId，与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 。         |
+| `firebase.storageBucket`     | 无     | Firebase storageBucket，与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 。     |
+| `firebase.messagingSenderId` | 无     | Firebase messagingSenderId，与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 。 |
+| `firebase.appId`             | 无     | Firebase appId，与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 。             |
+| `firebase.measurementId`     | 无     | Firebase measurementId，与 Firebase 集成的必填参数。了解如何将 Firebase 集成进 Blowfish 请参考 。     |
 
 ### Fathom Analytics(一种网站分析工具)
 

@@ -25,6 +25,9 @@ jobs:
 
       - name: Hugo Build
         run: |
+          rm -rf ~/.cache/hugo
+          rm -rf go.mod go.sum
+          hugo mod init erik-skopp.de
           hugo mod tidy
           hugo --gc --minify --enableGitInfo
 
