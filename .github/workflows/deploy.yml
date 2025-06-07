@@ -29,6 +29,7 @@ jobs:
           rm -rf go.mod go.sum
           hugo mod init erik-skopp.de
           hugo mod tidy
+          hugo mod graph
           hugo --gc --minify --enableGitInfo
 
       - name: Deploy with rsync
