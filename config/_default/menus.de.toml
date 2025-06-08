@@ -11,52 +11,31 @@
 # Das Menü wird dann nach Gewicht (aufsteigend) sortiert.
 
 [[main]]
-  name = "Beiträge"
-  pageRef = "blog"
-  weight = 10
+name = "Beiträge"
+pageRef = "docs"
+weight = 10
 
 [[main]]
-  name = "Beispiele"
-  weight = 20
+name = "Showcase"
+parent = "Beispiele"
+pageRef = "examples"
+weight = 30
 
 [[main]]
-  name = "Muster"
-  parent = "Beispiele"
-  pageRef = "samples"
-  weight = 16
+name = "Anleitungen"
+parent = "Beispiele"
+pageRef = "guides"
+weight = 40
 
 [[main]]
-  name = "Showcase"
-  parent = "Beispiele"
-  pageRef = "examples"
-  weight = 30
-
-[[main]]
-  name = "Anleitungen"
-  parent = "Beispiele"
-  pageRef = "guides"
-  weight = 40
-
-[[main]]
-  name = "Benutzer"
-  pageRef = "users"
-  weight = 90
-
-[[main]]
-  name = "Merchandise"
-  url = "https://www.teepublic.com/user/blowfish-store/t-shirts"
-  weight = 100
+name = "Benutzer"
+pageRef = "users"
+weight = 90
 
 #[[main]]
 #  name = "Test"
 #  pageRef = "pagTest"
 #  weight = 1000
-
-[[main]]
-  identifier = "twitter"
-  pre = "x-twitter"
-  url = "https://twitter.com/burufugu"
-  weight = 200
 
 #[[main]]
 #  identifier = "mastodon"
@@ -65,10 +44,10 @@
 #  url = "https://masto.ai/@blowfish"
 
 [[main]]
-  identifier = "github"
-  pre = "github"
-  url = "https://github.com/nunocoracao/blowfish"
-  weight = 400
+identifier = "github"
+pre = "github"
+url = "https://github.com/eskopp/"
+weight = 400
 
 # -- Fußzeilenmenü --
 # Das Fußzeilenmenü wird ganz unten auf der Seite angezeigt,
@@ -76,11 +55,11 @@
 # Konfiguration wie beim Hauptmenü oben.
 
 [[footer]]
-  name = "Schlagwörter"
-  pageRef = "tags"
-  weight = 10
+name = "Schlagwörter"
+pageRef = "tags"
+weight = 10
 
 [[footer]]
-  name = "Autoren"
-  pageRef = "authors"
-  weight = 20
+name = "Autoren"
+pageRef = "authors"
+weight = 20
