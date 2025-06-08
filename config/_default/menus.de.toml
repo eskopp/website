@@ -28,9 +28,10 @@ pageRef = "guides"
 weight = 40
 
 [[main]]
-name = "Benutzer"
-pageRef = "users"
+name = "Tagebuch"
+pageRef = "user"
 weight = 90
+url = "https://diary.erik-skop.de/"
 
 #[[main]]
 #  name = "Test"
