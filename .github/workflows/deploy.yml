@@ -10,8 +10,9 @@ env:
 
 jobs:
   deploy:
-    name: Deploy to Remote Server
+    name: Build & Deploy via SFTP
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -21,7 +22,9 @@ jobs:
           extended: true
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y lftp
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y lftp
 
       - name: Hugo Build
         run: |
@@ -32,10 +35,15 @@ jobs:
           hugo mod graph
           hugo --gc --minify --enableGitInfo
 
-      - name: Deploy with lftp (SFTP)
+      - name: Upload via SFTP mirror (webuser)
+        env:
+          SSHPW: ${{ secrets.SSHPW }}
+          SSHSERVER: ${{ secrets.SSHSERVER }}
         run: |
-          lftp -u webuser,"$SSHPW" sftp://$SSHSERVER <<EOF
-            set sftp:auto-confirm yes
-            mirror -R --delete --verbose ./public /var/www/erik-skopp.de
-            quit
-          EOF
+          lftp -u webuser,"$SSHPW" sftp://"$SSHSERVER" -e "\
+            set sftp:auto-confirm yes; \
+            set sftp:connect-program 'ssh -o StrictHostKeyChecking=no'; \
+            set net:max-retries 2; \
+            set net:timeout 30; \
+            mirror --reverse --delete --verbose --only-newer --parallel=4 public /erik-skopp.de; \
+            bye"
