@@ -21,7 +21,7 @@ jobs:
           extended: true
 
       - name: Install dependencies
-        run: sudo apt-get update && sudo apt-get install -y sshpass
+        run: sudo apt-get update && sudo apt-get install -y lftp
 
       - name: Hugo Build
         run: |
@@ -32,8 +32,10 @@ jobs:
           hugo mod graph
           hugo --gc --minify --enableGitInfo
 
-      - name: Deploy with rsync
+      - name: Deploy with lftp (SFTP)
         run: |
-          sshpass -p "$SSHPW" rsync -avz --delete \
-            -e "ssh -o StrictHostKeyChecking=no" \
-            public/ webuser@$SSHSERVER:/var/www/erik-skopp.de
+          lftp -u webuser,"$SSHPW" sftp://$SSHSERVER <<EOF
+            set sftp:auto-confirm yes
+            mirror -R --delete --verbose ./public /var/www/erik-skopp.de
+            quit
+          EOF
