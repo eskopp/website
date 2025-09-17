@@ -42,8 +42,10 @@ jobs:
         run: |
           lftp -u webuser,"$SSHPW" sftp://"$SSHSERVER" -e "\
             set sftp:auto-confirm yes; \
-            set sftp:connect-program 'ssh -o StrictHostKeyChecking=no'; \
-            set net:max-retries 2; \
-            set net:timeout 30; \
-            mirror --reverse --delete --verbose --only-newer --parallel=4 public /erik-skopp.de; \
+            set sftp:connect-program 'ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=15 -o ServerAliveCountMax=3'; \
+            set net:max-retries 3; \
+            set net:reconnect-interval-base 5; \
+            set net:timeout 45; \
+            cd /erik-skopp.de; \
+            mirror --reverse --delete --verbose --only-newer --parallel=4 public .; \
             bye"
