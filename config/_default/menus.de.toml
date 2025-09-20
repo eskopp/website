@@ -15,23 +15,17 @@ name = "Beiträge"
 pageRef = "docs"
 weight = 10
 
-[[main]]
-name = "Showcase"
-parent = "Beispiele"
-pageRef = "examples"
-weight = 30
+#[[main]]
+#name = "Showcase"
+#parent = "Beispiele"
+#pageRef = "examples"
+#weight = 30
 
-[[main]]
-name = "Anleitungen"
-parent = "Beispiele"
-pageRef = "guides"
-weight = 40
-
-[[main]]
-name = "Tagebuch"
-pageRef = "user"
-weight = 90
-url = "https://diary.erik-skop.de/"
+#[[main]]
+#name = "Anleitungen"
+#parent = "Beispiele"
+#pageRef = "guides"
+#weight = 40
 
 #[[main]]
 #  name = "Test"
@@ -48,6 +42,12 @@ url = "https://diary.erik-skop.de/"
 identifier = "github"
 pre = "github"
 url = "https://github.com/eskopp/"
+weight = 400
+
+[[main]]
+identifier = "gitlab"
+pre = "gitlab"
+url = "https://gitlab.erik-skopp.de/"
 weight = 400
 
 # -- Fußzeilenmenü --
