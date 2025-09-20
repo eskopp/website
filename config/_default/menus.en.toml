@@ -55,6 +55,12 @@ pre = "gitlab"
 url = "https://gitlab.erik-skopp.de/"
 weight = 500
 
+[[main]]
+identifier = "instagram"
+pre = "instagram"
+url = "https://www.instagram.com/eskopp/"
+weight = 500
+
 # -- Footer Menu --
 # The footer menu is displayed at the bottom of the page, just before
 # the copyright notice. Configure as per the main menu above.

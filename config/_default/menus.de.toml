@@ -50,6 +50,12 @@ pre = "gitlab"
 url = "https://gitlab.erik-skopp.de/"
 weight = 400
 
+[[main]]
+identifier = "instagram"
+pre = "instagram"
+url = "https://gitlab.erik-skopp.de/"
+weight = 500
+
 # -- Fußzeilenmenü --
 # Das Fußzeilenmenü wird ganz unten auf der Seite angezeigt,
 # direkt über dem Copyright.
