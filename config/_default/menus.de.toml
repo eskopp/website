@@ -53,7 +53,7 @@ weight = 400
 [[main]]
 identifier = "instagram"
 pre = "instagram"
-url = "https://gitlab.erik-skopp.de/"
+url = "https://www.instagram.com/eskopp/"
 weight = 500
 
 # -- Fußzeilenmenü --
