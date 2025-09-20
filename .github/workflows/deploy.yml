@@ -1,52 +1,54 @@
-name: Deploy Hugo Site
+name: Build & Deploy erik-skopp.de
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 env:
   SSHSERVER: ${{ secrets.SSHSERVER }}
   SSHPW: ${{ secrets.SSHPW }}
 
 jobs:
-  deploy:
-    name: Build & Deploy via SFTP
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v4
-
+      - uses: actions/checkout@v5
+        with: lfs: true
+      - uses: actions/setup-go@v6
+        with: go-version: 'stable'
       - uses: peaceiris/actions-hugo@v3
         with:
-          hugo-version: 'latest'
+          hugo-version: '0.148.1'
           extended: true
-
-      - name: Install dependencies
+      - name: Build
         run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
-
-      - name: Hugo Build
-        run: |
-          rm -rf ~/.cache/hugo
-          rm -rf go.mod go.sum
-          hugo mod init erik-skopp.de
+          hugo mod get
           hugo mod tidy
-          hugo mod graph
           hugo --gc --minify --enableGitInfo
-
-      - name: Upload via SFTP mirror (webuser)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: public
+          path: public/
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v5
+        with:
+          name: public
+          path: public
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+      - name: Upload via SFTP (webuser)
         env:
           SSHPW: ${{ secrets.SSHPW }}
           SSHSERVER: ${{ secrets.SSHSERVER }}
         run: |
-          lftp -u webuser,"$SSHPW" sftp://"$SSHSERVER" -e "\
-            set sftp:auto-confirm yes; \
-            set sftp:connect-program 'ssh -o StrictHostKeyChecking=no -o ServerAliveInterval=15 -o ServerAliveCountMax=3'; \
-            set net:max-retries 3; \
-            set net:reconnect-interval-base 5; \
-            set net:timeout 45; \
-            cd /erik-skopp.de; \
-            mirror --reverse --delete --verbose --only-newer --parallel=4 public .; \
-            bye"
- 
+          lftp -u webuser,"$SSHPW" "sftp://$SSHSERVER" -e '
+            set sftp:auto-confirm yes;
+            set net:max-retries 2;
+            set net:timeout 30;
+            mkdir -p /var/www/erik-skopp.de;
+            mirror --reverse --delete --verbose --only-newer --parallel=4 public /var/www/erik-skopp.de;
+            bye
+          '
