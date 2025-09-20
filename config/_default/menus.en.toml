@@ -52,7 +52,7 @@ weight = 400
 [[main]]
 identifier = "gitlab"
 pre = "gitlab"
-url = "https://github.com/eskopp/"
+url = "https://gitlab.erik-skopp.de/"
 weight = 500
 
 # -- Footer Menu --
