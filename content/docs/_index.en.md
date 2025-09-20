@@ -1,16 +1,14 @@
 ---
-title: "Documents"
-description: "Learn how to use Blowfish and its features."
+title: "Posts"
+description: "An overview of all posts."
 
 cascade:
   showDate: false
   showAuthor: false
   invertPagination: true
-
 ---
 
 {{< lead >}}
-Simple yet powerful. Learn how to use Blowfish and its features.
+Overview of all posts.
 {{< /lead >}}
-
-This section contains everything you need to know about Blowfish. If you're new, check out the getting started guide or explore the samples section to see what Blowfish can do.
+Everything that lives is designed to end

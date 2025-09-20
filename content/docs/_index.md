@@ -1,6 +1,6 @@
 ---
-title: "Dokumentation"
-description: "Lerne, wie du Blowfish und seine Funktionen nutzt."
+title: "Beiträge"
+description: "Eine Übersicht über alle Beiträge."
 
 cascade:
   showDate: false
@@ -9,7 +9,6 @@ cascade:
 ---
 
 {{< lead >}}
-Einfach, aber leistungsstark. Lerne, wie du Blowfish und seine Funktionen nutzt.
+Übersicht über alle Beiträge.
 {{< /lead >}}
-
-Dieser Abschnitt enthält alles, was du über Blowfish wissen musst. Wenn du neu bist, beginne mit der Einführung oder entdecke, was Blowfish alles kann.
+Alles, was lebt, ist dazu bestimmt, zu enden.
