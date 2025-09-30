@@ -1,22 +1,23 @@
-name: Deploy Hugo Site
+name: Build & Deploy Hugo Site to GitHub Pages
 
 on:
   push:
     branches: [ main ]
-
-env:
-  SSHSERVER: ${{ secrets.SSHSERVER }}
-  SSHPW: ${{ secrets.SSHPW }}
+  workflow_dispatch: {}
 
 concurrency:
   group: erik-skopp-deploy
   cancel-in-progress: true
 
-jobs:
-  deploy:
-    name: Build & Deploy via SFTP
-    runs-on: ubuntu-latest
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
+jobs:
+  build:
+    name: Build Hugo
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -25,9 +26,20 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Go (for Hugo Modules)
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v5
         with:
           go-version: "stable"
+          cache: true
+
+      - name: Cache Hugo modules & resources
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/hugo
+            ~/go/pkg/mod
+          key: ${{ runner.os }}-hugo-${{ hashFiles('**/go.mod') }}
+          restore-keys: |
+            ${{ runner.os }}-hugo-
 
       - name: Set up Hugo (extended)
         uses: peaceiris/actions-hugo@v3
@@ -35,29 +47,28 @@ jobs:
           hugo-version: "latest"
           extended: true
 
-      - name: Install lftp
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y lftp
-
       - name: Hugo Build
         run: |
-          # Module-Setup ohne jedes Mal neu zu initialisieren
           hugo mod get
           hugo mod tidy
           hugo --gc --minify --enableGitInfo
 
-      - name: Upload via SFTP mirror (webuser)
-        env:
-          SSHPW: ${{ secrets.SSHPW }}
-          SSHSERVER: ${{ secrets.SSHSERVER }}
-        run: |
-          lftp -u webuser,"$SSHPW" "sftp://$SSHSERVER" -e '
-            set sftp:auto-confirm yes;
-            set net:max-retries 3;
-            set net:reconnect-interval-base 5;
-            set net:timeout 45;
-            mkdir -p /var/www/erik-skopp.de;
-            mirror --reverse --delete --verbose --only-newer --parallel=4 public /var/www/erik-skopp.de;
-            bye
-          '
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy:
+    name: Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
