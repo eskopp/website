@@ -32,7 +32,7 @@ jobs:
           cache: true
 
       - name: Cache Hugo modules & resources
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.cache/hugo
