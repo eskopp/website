@@ -1,3 +1,3 @@
 module erik-skopp.de
 
-go 1.26.00
+go 1.26.1
