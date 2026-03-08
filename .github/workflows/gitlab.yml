@@ -1,0 +1,35 @@
+name: Mirror to GitLab
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["**"]
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mirror-to-gitlab
+  cancel-in-progress: true
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Sync branches and tags to GitLab
+        env:
+          GITLAB_TOKEN: ${{ secrets.GITLAB_TOKEN }}
+        run: |
+          set -euo pipefail
+          git fetch --prune --tags --force
+          GITLAB_URL="https://eskopp:${GITLAB_TOKEN}@gitlab.erik-skopp.de/eskopp/website.git"
+          git remote remove gitlab 2>/dev/null || true
+          git remote add gitlab "${GITLAB_URL}"
+          git push --force --prune gitlab 'refs/heads/*:refs/heads/*'
+          git push --force --prune gitlab 'refs/tags/*:refs/tags/*'
