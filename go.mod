@@ -1,5 +1,3 @@
-module github.com/nunocoracao/blowfish
+module erik-skopp.de
 
-go 1.24.2
-
-require github.com/nunocoracao/blowfish/v2 v2.86.0 // indirect
+go 1.26.00
