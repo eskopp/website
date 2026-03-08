@@ -11,7 +11,6 @@ disableLanguages = ["it"] #to allow translation work requiring shipping to produ
 enableRobotsTXT = true
 summaryLength = 30
 hasCJKLanguage = true
-googleAnalytics = "G-VHEPRBCWTX"
 buildDrafts = false
 buildFuture = false
 
