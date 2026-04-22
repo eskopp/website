@@ -52,6 +52,16 @@ jobs:
           hugo mod tidy
           hugo --gc --minify --enableGitInfo
 
+      - name: Verify homepage exists
+        run: |
+          test -f public/index.html || {
+            echo "ERROR: public/index.html fehlt"
+            echo
+            echo "Inhalt von public/:"
+            find public -maxdepth 2 | sort
+            exit 1
+          }
+
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh

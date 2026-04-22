@@ -1,3 +1,7 @@
-baseURL: https://example.org/
-locale: en-us
-title: My New Hugo Project
+baseURL: "https://example.org/"
+languageCode: "de-de"
+title: "Meine Seite"
+
+module:
+  imports:
+    - path: "github.com/tom2almighty/hugo-narrow"
