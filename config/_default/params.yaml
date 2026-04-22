@@ -1,8 +1,8 @@
 # Basic site info with SEO
 description: "A modern, clean, and minimal Hugo theme built with Tailwind CSS 4.0. Support custom themes, dark mode, and responsive design."
 keywords: ["Hugo", "Blog", "Theme", "Technology", "Programming"]
-defaultAuthor: "Hugo Narrow"
-language: "en"
+defaultAuthor: "Erik Skopp"
+language: "de"
 shortName: "Hugo Narrow" # PWA
 images:
   - "/images/og-default.avif"
@@ -13,20 +13,17 @@ favicon:
 
 # Author info
 author:
-  name: "Hugo Narrow"
+  name: "Erik Skopp"
   title: "A Clean and Minimal Hugo Theme"
   description: "Focused on content and user experience."
   avatar: "/images/avatar.svg"
   social:
     - name: "GitHub"
-      url: "https://github.com/username"
+      url: "https://github.com/eskopp"
       icon: "github"
     - name: "Twitter"
-      url: "https://twitter.com/username"
-      icon: "twitter"
-    - name: "Email"
-      url: "mailto:hello@example.com"
-      icon: "email"
+      url: "https://gitlab.erik-skopp.de"
+      icon: "gitlab"
 
 # Header configuration (modularized)
 header:
