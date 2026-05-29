@@ -15,6 +15,9 @@
 
 html,
 body {
+  overflow-x: hidden;
+  overscroll-behavior: none;
+
   margin: 0;
   min-height: 100%;
   font-family: Arial, Helvetica, sans-serif;
@@ -101,5 +104,51 @@ hr {
 
   hr {
     margin: 22px auto;
+  }
+}
+
+.gpg-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+
+.gpg-links {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.gpg-btn {
+  display: block;
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(122, 176, 95, 0.55);
+  background: rgba(122, 176, 95, 0.10);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background 0.15s, border-color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.gpg-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .gpg-links {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gpg-btn {
+    text-align: center;
   }
 }
